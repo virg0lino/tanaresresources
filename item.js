@@ -7,7 +7,6 @@ class Item {
         this.nome = myobj.nome;
         this.Property = myobj.Property;
         this.Propertycp = myobj.Propertycp;
-
         this.fontesPoder = myobj.fontesPoder;
         this.tipo = myobj.tipo;
         this.categoria = myobj.categoria;
@@ -15,7 +14,6 @@ class Item {
         this.ataque = myobj.ataque;
         this.hp = myobj.hp;
         this.defesa = myobj.defesa;
-
         this.capacidadepoder = myobj.capacidadepoder;
     }
 
