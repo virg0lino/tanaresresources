@@ -11,7 +11,6 @@ function loadLibrary(elementId) {
             });
         })
         .catch(function (err) { console.log(err); });
-
 }
 
 function download(objeto,nomeArquivo) {

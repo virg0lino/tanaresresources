@@ -26,4 +26,4 @@ var attacklevels = [
     { id: 1, danoacerto: 14 },
     { id: 2, danoacerto: 15 },
     { id: 3, danoacerto: 22 },
-];
+]; 
