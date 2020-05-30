@@ -62,25 +62,56 @@
             </div>
         </div>
 
-        <div class="jumbotron text-center impressaoNao">
+        <div class="container-fluid text-center impressaoNao">
             <h1>Itens set</h1>
             <p>criando set de Itens!</p>
-            <button title="voltar" class="btn btn-outline-info" onclick="window.location.href='index.html'"><i
-                    class="fas fa-arrow-left"></i></button>
-            <button title="novo" class="btn btn-outline-info"
-                onclick="sessionStorage.ItensSet=null;location.reload();"><i class="fas fa-file"></i></button>
-            <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
-            <button title="carregar arquivo" class="btn btn-outline-info"
-                onclick="document.getElementById('fileInput').click();"><i class="far fa-folder-open"></i></button>
-            <button title="salvar arquivo" class="btn btn-outline-info" v-on:click="download(ItensSet,'itemset')"><i
-                    class="fas fa-download"></i></button>
-            <button title="imprimir" class="btn btn-outline-info" onclick="print()"><i
-                    class="fas fa-print"></i></button>
-            <button title="Livraria" class="btn btn-outline-info" data-toggle="modal" data-target="#ModalLibrary"><i
-                    class="fas fa-book"></i></button>
         </div>
 
-        <div class="container impressaoNao">
+        <nav class="navbar navbar-expand-md bg-info navbar-dark sticky-top">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#!" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i> Itens set</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse " id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!" onclick="sessionStorage.ItensSet=null;location.reload();"> 
+                            <i class="fas fa-file"></i> Novo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
+                        <a class="nav-link" href="#!" onclick="document.getElementById('fileInput').click();">
+                            <i class="far fa-folder-open"></i> Abrir
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!" v-on:click="download(ItensSet,'itemset')">
+                            <i class="fas fa-download"></i> Salvar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!" onclick="print()">
+                            <i class="fas fa-print"></i> Imprimir
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!" data-toggle="modal" data-target="#ModalLibrary">
+                            <i class="fas fa-book"></i> Livraria
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container impressaoNao  mt-5 mb-5">
             <div class="row m-2">
                 <div class="col-md-6 text-center">
                     <button class=" btn btn-success btn-sm" v-on:click="addItem(tiposItens[0])">Add
@@ -256,6 +287,8 @@
             },
             mounted: function () {
                 document.addEventListener('focus', this.saveSession, true);
+                loadLibrary('librarycontent');
+
             },
             methods: {
                 addItem: function (tipo) {
@@ -286,7 +319,6 @@
                 },
                 saveSession: function () {
                     sessionStorage.ItensSet = JSON.stringify(this.ItensSet);
-                    loadLibrary('librarycontent');
                 },
                 download: function () {
                     let element = document.createElement('a');
