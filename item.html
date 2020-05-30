@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>virgolino's help maker - ataques</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="item.js"></script>
+    <script src="enum.js"></script>
+    <script src="helper.js"></script>
+
+    <style>
+        @media print {
+            .impressaoNao {
+                display: none;
+            }
+
+            .impressao {
+                display: block;
+            }
+        }
+
+        @media screen {
+            .impressao {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div id="app" class="">
+
+        <div class="impressao">
+            <div class="card" v-for="item in ItensSet.Itens">
+                <div class="card-body">
+                    {{item.categoria}} {{item.tipo}} Level {{item.level.id}}<br>
+                    {{item.nome}}<br>
+                    Proficiency: {{item.proficiency.toString()}}<br>
+                    Bonus:
+                    <span v-if="item.tipo =='Weapon'">
+                        <span v-if="item.ataque>0">+{{item.ataque}} to Hit</span>
+                        <span v-if="item.dano>0 && item.ataque>0">, </span>
+                        <span v-if="item.dano>0">+{{item.dano}} Damage</span>
+                    </span>
+                    <span v-if="item.tipo=='Armor'">
+                        <span v-if="item.hp>0">+{{item.hp}} HP</span>
+                        <span v-if="item.defesa>0 && item.hp>0">, </span>
+                        <span v-if="item.defesa>0">+{{item.defesa}} Defense</span>
+                    </span>
+                    <br>
+                    Property <span v-if="item.Propertycp!=0">(CP={{item.Propertycp}})</span>: {{item.Property}}<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron text-center impressaoNao">
+            <h1>Itens set</h1>
+            <p>criando set de Itens!</p>
+            <button title="voltar" class="btn btn-outline-info" onclick="window.location.href='index.html'"><i
+                    class="fas fa-arrow-left"></i></button>
+            <button title="novo" class="btn btn-outline-info"
+                onclick="sessionStorage.ItensSet=null;location.reload();"><i class="fas fa-file"></i></button>
+            <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
+            <button title="carregar arquivo" class="btn btn-outline-info"
+                onclick="document.getElementById('fileInput').click();"><i class="far fa-folder-open"></i></button>
+            <button title="salvar arquivo" class="btn btn-outline-info" v-on:click="download(ItensSet,'itemset')"><i
+                    class="fas fa-download"></i></button>
+            <button title="imprimir" class="btn btn-outline-info" onclick="print()"><i
+                    class="fas fa-print"></i></button>
+            <button title="Livraria" class="btn btn-outline-info" data-toggle="modal" data-target="#ModalLibrary"><i
+                    class="fas fa-book"></i></button>
+        </div>
+
+        <div class="container impressaoNao">
+            <div class="row m-2">
+                <div class="col-md-6 text-center">
+                    <button class=" btn btn-success btn-sm" v-on:click="addItem(tiposItens[0])">Add
+                        Weapon</button></div>
+                <div class="col-md-6 text-center">
+                    <button class=" btn btn-success btn-sm" v-on:click="addItem(tiposItens[1])">Add
+                        Armor</button></div>
+            </div>
+            <div class="card m-2" v-for="item in ItensSet.Itens">
+                <div class="card-header">{{item.tipo}}
+                    <button class="float-right btn btn-danger btn-sm"
+                        v-on:click="if(confirm('deseja realmente excluir este item?')){dropItem(item.id)}">
+                        Remove</button>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-8">
+                            <label>Name:</label>
+                            <input class="form-control" v-model="item.nome"></textarea>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>CP:</label>
+                            <input class="form-control" readonly v-model="item.capacidadepoder"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Level:</label>
+                            <select class="form-control" v-model="item.level">
+                                <option v-for="level in itemlevels" v-bind:value="level">Level {{level.id}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4" v-if="item.tipo == 'Weapon'">
+                            <label>Category:</label>
+                            <select class="form-control" v-model="item.categoria">
+                                <option v-for="c in categoriaArma" v-bind:value="c">{{c}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4" v-if="item.tipo == 'Armor'">
+                            <label>Category:</label>
+                            <select class="form-control" v-model="item.categoria">
+                                <option v-for="c in categoriaArmadura" v-bind:value="c">{{c}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Power source:</label><br>
+                            <div class="form-check-inline" v-for="(fp,index) in fontesPoder">
+                                <label class="form-check-label">
+                                    <input type="checkbox" v-bind:id="fp+index" v-bind:value="fp"
+                                        v-model="item.fontesPoder" class="form-check-input">
+                                    {{fp}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label>Proficiency:</label><br>
+                            <div class="form-check-inline" v-for="(p,index) in Proficiency">
+                                <label class="form-check-label">
+                                    <input type="checkbox" v-bind:id="p+index" v-bind:value="p"
+                                        v-model="item.proficiency" class="form-check-input">
+                                    {{p}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" v-if="item.tipo == 'Weapon'">
+                        <div class="form-group col-md-6">
+                            <label>Damage:
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"
+                                        v-on:click="item.changeDG(-1)">-1</button>
+                                    <button type="button" class="btn btn-primary"
+                                        v-on:click="item.changeDG(1)">+1</button>
+                                </div>
+                            </label>
+                            <input type="number" readonly class="form-control" v-model="item.dano">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Attack:
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"
+                                        v-on:click="item.changeATT(-1)">-1</button>
+                                    <button type="button" class="btn btn-primary"
+                                        v-on:click="item.changeATT(1)">+1</button>
+                                </div>
+                            </label>
+                            <input type="number" readonly class="form-control" v-model="item.ataque">
+                        </div>
+                    </div>
+                    <div class="row" v-if="item.tipo == 'Armor'">
+                        <div class="form-group col-md-6">
+                            <label>HP:
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"
+                                        v-on:click="item.changeHP(-1)">-1</button>
+                                    <button type="button" class="btn btn-primary"
+                                        v-on:click="item.changeHP(1)">+1</button>
+                                </div>
+                            </label>
+                            <input type="number" readonly class="form-control" v-model="item.hp">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Defense:
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"
+                                        v-on:click="item.changeDEF(-1)">-1</button>
+                                    <button type="button" class="btn btn-primary"
+                                        v-on:click="item.changeDEF(1)">+1</button>
+                                </div>
+                            </label>
+                            <input type="number" readonly class="form-control" v-model="item.defesa">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-9">
+                            <label for="mlevel">Property:</label>
+                            <textarea class="form-control" rows="3" v-model="item.Property"></textarea>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Property CP:
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"
+                                        v-on:click="item.changePCP(-1)">-1</button>
+                                    <button type="button" class="btn btn-primary"
+                                        v-on:click="item.changePCP(1)">+1</button>
+                                </div>
+                            </label>
+                            <input type="number" readonly class="form-control" v-model="item.Propertycp">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal" id="ModalLibrary">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tanares Design Library</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" id="librarycontent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var myObject = new Vue({
+            el: '#app',
+            data: {
+                ItensSet: {
+                    Itens: [],
+                },
+
+            },
+            created: function () {
+                if (sessionStorage.ItensSet != "null" && sessionStorage.ItensSet != "undefined") {
+                    this.jsonToItens(sessionStorage.ItensSet);
+                }
+            },
+            mounted: function () {
+                document.addEventListener('focus', this.saveSession, true);
+            },
+            methods: {
+                addItem: function (tipo) {
+                    item = new Item({
+                        id: this.create_UUID(),
+                        proficiency: [],
+                        bonus: "",
+                        nome: "",
+                        Property: "",
+                        Propertycp: 0,
+                        fontesPoder: [],
+                        tipo: tipo,
+                        categoria: "",
+                        dano: 0,
+                        ataque: 0,
+                        hp: 0,
+                        defesa: 0,
+                        capacidadepoder: 0,
+                    });
+
+                    item.level = itemlevels[0];
+                    this.ItensSet.Itens.push(item);
+
+                },
+                dropItem: function (itemId) {
+                    let removeIndex = this.ItensSet.Itens.map(function (item) { return item.id; }).indexOf(itemId);
+                    this.ItensSet.Itens.splice(removeIndex, 1);
+                },
+                saveSession: function () {
+                    sessionStorage.ItensSet = JSON.stringify(this.ItensSet);
+                    loadLibrary('librarycontent');
+                },
+                download: function () {
+                    let element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.ItensSet)));
+                    element.setAttribute('download', "itens");
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                },
+                getFile: function (event) {
+                    let file = event.target.files[0];
+                    let reader = new FileReader();
+                    reader.onload = this.loadobj;
+                    reader.readAsText(file);
+
+                },
+                loadobj: function (evt) {
+                    try {
+                        this.jsonToItens(evt.target.result);
+                    } catch (error) {
+                        alert(error);
+                    }
+                },
+                jsonToItens: function (stringJson) {
+                    try {
+                        let loadobj = JSON.parse(stringJson);
+                        itens = [];
+                        for (const objItem of loadobj.Itens) {
+                            let item = new Item({
+                                id: objItem.id,
+                                proficiency: objItem.proficiency,
+                                bonus: objItem.bonus,
+                                nome: objItem.nome,
+                                Property: objItem.Property,
+                                Propertycp: objItem.Propertycp,
+                                fontesPoder: objItem.fontesPoder,
+                                tipo: objItem.tipo,
+                                categoria: objItem.categoria,
+                            });
+                            item.level = objItem._level;
+                            item.dano = objItem.dano;
+                            item.ataque = objItem.ataque;
+                            item.hp = objItem.hp;
+                            item.defesa = objItem.defesa;
+                            item.capacidadepoder = objItem.capacidadepoder;
+
+                            itens.push(item);
+                        }
+
+                        this.ItensSet.Itens = itens;
+                    } catch (error) {
+                        console.log(error);
+                    }
+
+                },
+                create_UUID: function () {
+                    let dt = new Date().getTime();
+                    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                        let r = (dt + Math.random() * 16) % 16 | 0;
+                        dt = Math.floor(dt / 16);
+                        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                    });
+                    return uuid;
+                },
+            }
+        })
+    </script>
+
+</body>
+
+</html>

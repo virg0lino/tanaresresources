@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>virgolino's help maker - ataques</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="ataque.js"></script>
+    <script src="enum.js"></script>
+    <script src="helper.js"></script>
+
+    <style>
+        @media print {
+            .impressaoNao {
+                display: none;
+            }
+
+            .impressao {
+                display: block;
+            }
+        }
+
+        @media screen {
+            .impressao {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div id="app" class="">
+
+        <div class="impressao">
+            Pack de ataques para {{heroAtaque.role}}<br>
+            <div class="card" v-for="ataque in heroAtaque.ataques">
+                <div class="card-body">
+                    {{ataque.nome}}<br>
+                    ({{ataque.fontedepoder.toString()}}) - Level ({{ataque.level.id}})<br>
+                    Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
+                    <div v-if="ataque.handpower!=''">Handpower <span
+                            v-if="ataque.handpowercp!=0">(CP={{ataque.handpowercp}})</span>: {{ataque.handpower}}<br>
+                    </div>
+                    <div v-if="ataque.beneficio!=''">Beneft <span
+                            v-if="ataque.beneficiocp!=0">(CP={{ataque.beneficiocp}})</span>: {{ataque.beneficio}}<br>
+                    </div>
+                    <div v-if="ataque.penalidade!=''">Drawback <span
+                            v-if="ataque.penalidadecp!=0">(CP={{ataque.penalidadecp}})</span>: {{ataque.penalidade}}<br>
+                    </div>
+                    Hit: ({{ataque.danoacerto}}) damage + effect<br>
+                    <div v-if="ataque.danoerro!=''">Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
+                    <div v-if="ataque.efeito!=''">Effect <span
+                            v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: {{ataque.efeito}}<br></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron text-center impressaoNao">
+            <h1>Heroes Attack </h1>
+            <p>criando pack de ataque!</p>
+            <button title="voltar" class="btn btn-outline-info" onclick="window.location.href='index.html'"><i
+                    class="fas fa-arrow-left"></i></button>
+            <button title="novo" class="btn btn-outline-info" onclick="sessionStorage.ataques=null;location.reload();"><i
+                    class="fas fa-file"></i></button>
+            <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
+            <button title="carregar arquivo" class="btn btn-outline-info"
+                onclick="document.getElementById('fileInput').click();"><i class="far fa-folder-open"></i></button>
+            <button title="salvar arquivo" class="btn btn-outline-info" v-on:click="download(heroAtaque,'Ataquesherois')"><i
+                    class="fas fa-download"></i></button>
+            <button title="imprimir" class="btn btn-outline-info" onclick="print()"><i
+                    class="fas fa-print"></i></button>
+                    <button title="Livraria" class="btn btn-outline-info" data-toggle="modal" data-target="#ModalLibrary"><i
+                        class="fas fa-book"></i></button>
+        </div>
+
+        <div class="container impressaoNao">
+            <div class=" card row">
+                <div class="form-group col">
+                    <label>Role:</label>
+                    <select class="form-control" v-model="heroAtaque.role">
+                        <option v-for="rol in Proficiency" v-bind:value="rol">{{rol}}</option>
+                    </select>
+                </div>
+            </div>
+            <div v-for="(ataque,index) in heroAtaque.ataques" :key="ataque.id">
+                <div class="card m-2">
+                    <div class="card-header">
+                        <input type="hidden" v--model="ataque.level">
+                        Attack level: {{ataque.level.id}}
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="form-group col-8">
+                                <label for="mlevel">Name:</label>
+                                <input class="form-control" v-model="ataque.nome"></textarea>
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="mlevel">CP:</label>
+                                <input class="form-control" readonly v-model="ataque.capacidadepoder"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Range:</label>
+                                <select class="form-control" v-model="ataque.alcance">
+                                    <option v-for="alc in alcances" v-bind:value="alc">{{alc}} square</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="mlevel">Target:</label>
+                                <input class="form-control" v-model="ataque.alvo">
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="mlevel">Power source:</label><br>
+                                <div class="form-check-inline" v-for="(fp,index) in fontesPoder">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" v-bind:id="fp+index" v-bind:value="fp"
+                                            v-model="ataque.fontedepoder" class="form-check-input">
+                                        {{fp}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" v-if="ataque.level.id === 3">
+                            <div class="form-group col-md-9">
+                                <label for="mlevel">Handpower:</label>
+                                <textarea class="form-control" rows="3" v-model="ataque.handpower"></textarea>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Handpower CP:
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-warning"
+                                            v-on:click="ataque.changeHCP(-1)">-1</button>
+                                        <button type="button" class="btn btn-primary"
+                                            v-on:click="ataque.changeHCP(1)">+1</button>
+                                    </div>
+                                </label>
+                                <input type="number" readonly class="form-control" v-model="ataque.handpowercp">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label>Beneft:</label>
+                                <textarea class="form-control" rows="3" v-model="ataque.beneficio"></textarea>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Beneft CP:
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-warning"
+                                            v-on:click="ataque.changeBCP(-1)">-1</button>
+                                        <button type="button" class="btn btn-primary"
+                                            v-on:click="ataque.changeBCP(1)">+1</button>
+                                    </div>
+                                </label>
+                                <input type="number" readonly class="form-control" v-model="ataque.beneficiocp">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label>Drawback:</label>
+                                <textarea class="form-control" rows="3" v-model="ataque.penalidade"></textarea>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="txtacp">Drawback CP:
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-warning"
+                                            v-on:click="ataque.changePCP(-1)">-1</button>
+                                        <button type="button" class="btn btn-primary"
+                                            v-on:click="ataque.changePCP(1)">+1</button>
+                                    </div>
+                                </label>
+                                <input type="number" readonly class="form-control" v-model="ataque.penalidadecp">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Hit:
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-warning"
+                                            v-on:click="ataque.changeDG(-1)">-1</button>
+                                        <button type="button" class="btn btn-primary"
+                                            v-on:click="ataque.changeDG(1)">+1</button>
+                                    </div>
+                                </label>
+                                <input class="form-control" readonly v-model="ataque.danoacerto"></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Miss:
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-warning"
+                                            v-on:click="ataque.changeMDG(-1)">-1</button>
+                                        <button type="button" class="btn btn-primary"
+                                            v-on:click="ataque.changeMDG(1)">+1</button>
+                                    </div>
+                                </label>
+                                <input class="form-control" readonly v-model="ataque.danoerro"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label>Effect :</label>
+                                <textarea class="form-control" rows="3" v-model="ataque.efeito"></textarea>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Effect CP:
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-warning"
+                                            v-on:click="ataque.changeECP(-1)">-1</button>
+                                        <button type="button" class="btn btn-primary"
+                                            v-on:click="ataque.changeECP(1)">+1</button>
+                                    </div>
+                                </label>
+                                <input type="number" readonly class="form-control" v-model="ataque.efeitocp">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="ModalLibrary">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tanares Design Library</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" id="librarycontent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        var myObject = new Vue({
+            el: '#app',
+            data: {
+                heroAtaque: {
+                    role: "",
+                    ataques: [],
+                },
+            },
+            created: function () {
+                for (let index = 0; index < attacklevels.length; index++) {
+                    let ataque = new Ataque();
+                    ataque.level = attacklevels[index];
+                    ataque.alcance = alcances[index];
+                    
+                    this.heroAtaque.ataques.push(ataque);
+                }
+                if (sessionStorage.ataques != "null" && sessionStorage.ataques != "undefined") {
+                    this.jsonToAtaques(sessionStorage.ataques);
+                }
+
+            },
+            mounted: function () {
+                document.addEventListener('focus', this.saveSession, true);
+                loadLibrary('librarycontent');
+            },
+            methods: {
+                saveSession: function () {
+                    sessionStorage.ataques = JSON.stringify(this.heroAtaque);
+                },
+                download: function () {
+                    let element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.heroAtaque)));
+                    element.setAttribute('download', this.heroAtaque.role != "" ? this.heroAtaque.role : "ataque");
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                },
+                getFile: function (event) {
+                    let file = event.target.files[0];
+                    let reader = new FileReader();
+                    reader.onload = this.loadataques;
+                    reader.readAsText(file);
+
+                },
+                loadataques: function (evt) {
+                    try {
+                        this.jsonToAtaques(evt.target.result);
+                    } catch (error) {
+                        alert(error);
+                    }
+                },
+                jsonToAtaques: function (stringJson) {
+                    try {
+                        let loadataque = JSON.parse(stringJson);
+                        this.heroAtaque.role = loadataque.role;
+                        for (let index = 0; index < loadataque.ataques.length; index++) {
+                            this.heroAtaque.ataques[index].nome = loadataque.ataques[index].nome;
+                            this.heroAtaque.ataques[index].level = loadataque.ataques[index]._level;
+                            this.heroAtaque.ataques[index].fontedepoder = loadataque.ataques[index].fontedepoder;
+                            this.heroAtaque.ataques[index].alcance = loadataque.ataques[index].alcance;
+                            this.heroAtaque.ataques[index].alvo = loadataque.ataques[index].alvo;
+                            this.heroAtaque.ataques[index].handpower = loadataque.ataques[index].handpower;
+                            this.heroAtaque.ataques[index].handpowercp = loadataque.ataques[index].handpowercp;
+                            this.heroAtaque.ataques[index].beneficio = loadataque.ataques[index].beneficio;
+                            this.heroAtaque.ataques[index].beneficiocp = loadataque.ataques[index].beneficiocp;
+                            this.heroAtaque.ataques[index].penalidade = loadataque.ataques[index].penalidade;
+                            this.heroAtaque.ataques[index].penalidadecp = loadataque.ataques[index].penalidadecp;
+                            this.heroAtaque.ataques[index].danoacerto = loadataque.ataques[index].danoacerto;
+                            this.heroAtaque.ataques[index].danoerro = loadataque.ataques[index].danoerro;
+                            this.heroAtaque.ataques[index].efeito = loadataque.ataques[index].efeito;
+                            this.heroAtaque.ataques[index].efeitocp = loadataque.ataques[index].efeitocp;
+                            this.heroAtaque.ataques[index].capacidadepoder = loadataque.ataques[index].capacidadepoder;
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
