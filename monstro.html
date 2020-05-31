@@ -229,7 +229,7 @@
                                     <button type="button" class="btn btn-primary btn-sm"
                                         v-on:click="monster.addAtaque(new Ataque())">+</button>
                                 </label>
-                                <div class="card bg-light" v-for="(ataque,index) in monster.attack">
+                                <div class="card bg-light mt-1" v-for="(ataque,index) in monster.attack">
                                     <div class="card-header">
                                         Ataque {{index+1}}
                                         <button class="btn btn-danger btn-sm float-right"
@@ -276,13 +276,13 @@
                                                 <label>Hit:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeDG(-1));">-1</button>
+                                                            v-on:click="monster.changeDG(-1);">-1</button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeDG(1));">+1</button>
+                                                            v-on:click="monster.changeDG(1);">+1</button>
                                                     </div>
                                                 </label>
                                                 <input class="form-control" readonly
-                                                    v-model="ataque.danoacerto"></textarea>
+                                                    v-model="monster.dg"></textarea>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Miss:
