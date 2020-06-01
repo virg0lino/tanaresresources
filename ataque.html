@@ -230,12 +230,12 @@
                                 <label>Miss:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
-                                            v-on:click="ataque.changeMDG(-1)">-1</button>
+                                            v-on:click="ataque.changeCP(-0.5)">-1</button>
                                         <button type="button" class="btn btn-primary"
-                                            v-on:click="ataque.changeMDG(1)">+1</button>
-                                    </div>
+                                            v-on:click="ataque.changeCP(0.5)">+1</button>
+                                    </div>Livre
                                 </label>
-                                <input class="form-control" readonly v-model="ataque.danoerro"></textarea>
+                                <input class="form-control" v-model="ataque.danoerro"></textarea>
                             </div>
                         </div>
                         <div class="row">

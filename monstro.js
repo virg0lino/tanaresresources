@@ -15,7 +15,8 @@ class Monstro {
         this.mv = 6;
         this.mvcp = 0;
         this.feature = "";
-        this.attack = [];
+        this.attack = [new Ataque()];
+        this.hasSpecial = false;
         this.strategy = "";
     }
 
@@ -76,7 +77,7 @@ class Monstro {
     }
 
     changeDG(valor) {
-        this.cp -= valor/2;
+        this.cp -= valor;
 
         if (valor > 0) {
             this.dg += 2/2;

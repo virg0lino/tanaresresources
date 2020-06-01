@@ -32,6 +32,8 @@
                 display: none;
             }
         }
+
+  
     </style>
 </head>
 
@@ -53,14 +55,15 @@
                     {{m.mv}} Movement <br>
                     {{m.dg}} Damage ({{m.fp}})<br>
                     Features: {{m.feature}}<br>
-                    Attacks:<br>
+                    {{m.hasSpecial?'Special Attack':'Primary Attack'}}:<br>
                     <span v-for="ataque in m.attack">
-                            (CP={{ataque.capacidadepoder}}) {{ataque.nome}} ({{ataque.fontedepoder.toString()}})<br>
-                            Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
-                            Hit: ({{ataque.danoacerto}}) damage + effect<br>
+                        (CP={{ataque.capacidadepoder}}) {{ataque.nome}} ({{ataque.fontedepoder.toString()}})<br>
+                        Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
+                        Hit: ({{ataque.danoacerto}}) damage + effect<br>
                         <div v-if="ataque.danoerro!=''">Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
-                        <div v-if="ataque.efeito!=''">Effect <span v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: 
-                                {{ataque.efeito}}<br></div><br>
+                        <div v-if="ataque.efeito!=''">Effect <span
+                                v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>:
+                            {{ataque.efeito}}<br></div><br>
                     </span>
                     Command Basic Strategy: {{m.strategy}}<br>
                 </div>
@@ -86,7 +89,7 @@
             <div class="collapse navbar-collapse " id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#!" onclick="sessionStorage.monsters=null;location.reload();"> 
+                        <a class="nav-link" href="#!" onclick="sessionStorage.monsters=null;location.reload();">
                             <i class="fas fa-file"></i> Novo
                         </a>
                     </li>
@@ -160,7 +163,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="txthp">HP:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
@@ -171,7 +174,7 @@
                                 </label>
                                 <input type="number" readonly class="form-control" v-model="monster.hp">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label>Basic Attack:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
@@ -182,7 +185,7 @@
                                 </label>
                                 <input type="number" readonly class="form-control" v-model="monster.ba">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label>Def:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
@@ -193,7 +196,7 @@
                                 </label>
                                 <input type="number" readonly class="form-control" v-model="monster.def">
                             </div>
-                            <div class="form-group col-md-3">
+                           <!--  <div class="form-group col-md-3">
                                 <label for="txtdg">Damage:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
@@ -203,7 +206,7 @@
                                     </div>
                                 </label>
                                 <input type="number" readonly class="form-control" v-model="monster.dg">
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="form-group col-md-9">
@@ -223,17 +226,21 @@
                                 <input type="number" readonly class="form-control" v-model="monster.fcp">
                             </div>
                         </div>
+                        <div class="row mt-1 mb-2">
+                            <div class="col">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                                        v-model="monster.hasSpecial">
+                                    <label class="custom-control-label" for="customSwitch1">Special Attack</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label for="txtatt">Attacks:
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                        v-on:click="monster.addAtaque(new Ataque())">+</button>
-                                </label>
-                                <div class="card bg-light mt-1" v-for="(ataque,index) in monster.attack">
+
+                                <div v-bind:class="'card bg-light mt-1'" v-for="(ataque,index) in monster.attack">
                                     <div class="card-header">
-                                        Ataque {{index+1}}
-                                        <button class="btn btn-danger btn-sm float-right"
-                                            v-on:click="monster.dropAtaque(index)"><i class="fas fa-trash"></i></button>
+                                        {{monster.hasSpecial?'Special Attack':'Primary Attack'}}
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -272,28 +279,40 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4" v-if="!monster.hasSpecial">
                                                 <label>Hit:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeDG(-1);">-1</button>
+                                                            v-on:click="monster.changeDG(ataque.changeDG(-1));">-1</button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeDG(1);">+1</button>
+                                                            v-on:click="monster.changeDG(ataque.changeDG(1));">+1</button>
                                                     </div>
                                                 </label>
-                                                <input class="form-control" readonly
-                                                    v-model="monster.dg"></textarea>
+                                                <input class="form-control" readonly v-model="monster.dg"></textarea>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4" v-else>
+                                                <label>Hit:
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-warning"
+                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));">-1</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));">+1</button>
+                                                    </div>
+                                                    livre
+                                                </label>
+                                                <input class="form-control" v-model="monster.dg"></textarea>
+                                            </div>
+                                            <div class="form-group col-md-4">
                                                 <label>Miss:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeMDG(-1))">-1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));">-1</button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeMDG(1))">+1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));">+1</button>
                                                     </div>
+                                                    livre
                                                 </label>
-                                                <input class="form-control" readonly
+                                                <input class="form-control" 
                                                     v-model="ataque.danoerro"></textarea>
                                             </div>
                                         </div>
@@ -411,8 +430,8 @@
                         this.monsters[index].acp = loadmonster[index].acp;
                         this.monsters[index].mv = loadmonster[index].mv;
                         this.monsters[index].feature = loadmonster[index].feature;
-                        this.monsters[index].attack =[];
-                        
+                        this.monsters[index].attack = [];
+
                         for (const obj of loadmonster[index].attack) {
                             let ataque = new Ataque();
                             ataque.nome = obj.nome;
