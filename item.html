@@ -2,30 +2,34 @@
 <html lang="en">
 
 <head>
-    <title>Tanares Adventures - item set</title>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="item.js"></script>
-    <script src="enum.js"></script>
-    <script src="helper.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>tanares resource maker - Item set</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/business-casual.min.css" rel="stylesheet">
+
+
 
     <style>
         @media print {
             .impressaoNao {
                 display: none;
             }
-
             .impressao {
                 display: block;
             }
         }
-
+        
         @media screen {
             .impressao {
                 display: none;
@@ -40,149 +44,149 @@
     <div id="app" class="">
 
         <div class="impressao">
-            <div class="card" v-for="item in ItensSet.Itens">
+            <div class="card m-4 border-0" v-for="item in ItensSet.Itens">
                 <div class="card-body">
-                    {{item.categoria}} {{item.tipo}} Level {{item.level.id}}<br>
-                    {{item.nome}}<br>
-                    Proficiency: {{item.proficiency.toString()}}<br>
-                    Bonus:
+                    {{item.categoria}} {{item.tipo}} Level {{item.level.id}}<br> {{item.nome}}
+                    <br> Proficiency: {{item.proficiency.toString()}}<br> Bonus:
                     <span v-if="item.tipo =='Weapon'">
                         <span v-if="item.ataque>0">+{{item.ataque}} to Hit</span>
-                        <span v-if="item.dano>0 && item.ataque>0">, </span>
-                        <span v-if="item.dano>0">+{{item.dano}} Damage</span>
+                    <span v-if="item.dano>0 && item.ataque>0">, </span>
+                    <span v-if="item.dano>0">+{{item.dano}} Damage</span>
                     </span>
                     <span v-if="item.tipo=='Armor'">
                         <span v-if="item.hp>0">+{{item.hp}} HP</span>
-                        <span v-if="item.defesa>0 && item.hp>0">, </span>
-                        <span v-if="item.defesa>0">+{{item.defesa}} Defense</span>
+                    <span v-if="item.defesa>0 && item.hp>0">, </span>
+                    <span v-if="item.defesa>0">+{{item.defesa}} Defense</span>
                     </span>
-                    <br>
-                    Property <span v-if="item.Propertycp!=0">(CP={{item.Propertycp}})</span>: {{item.Property}}<br>
+                    <br> Property <span v-if="item.Propertycp!=0">(CP={{item.Propertycp}})</span>: {{item.Property}}<br>
                 </div>
             </div>
         </div>
 
-        <div class="container-fluid text-center impressaoNao">
-            <h1>Itens set</h1>
-            <p>criando set de Itens!</p>
-        </div>
 
-        <nav class="navbar navbar-expand-md bg-info navbar-dark sticky-top">
-            <!-- Brand -->
-            <a class="navbar-brand" href="#!" onclick="window.location.href='index.html'">
-                <i class="fas fa-arrow-left"></i> Itens set</a>
+        <h1 class="site-heading text-center text-white d-none d-lg-block">
+            <span class="site-heading-upper text-primary mb-3">FORGE POWER</span>
+            <span class="site-heading-lower">Item Set</span>
+        </h1>
 
-            <!-- Toggler/collapsibe Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar links -->
-            <div class="collapse navbar-collapse " id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" onclick="sessionStorage.ItensSet=null;location.reload();"> 
-                            <i class="fas fa-file"></i> Novo
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
-                        <a class="nav-link" href="#!" onclick="document.getElementById('fileInput').click();">
-                            <i class="far fa-folder-open"></i> Abrir
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" v-on:click="download(ItensSet,'itemset')">
-                            <i class="fas fa-download"></i> Salvar
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" onclick="print()">
-                            <i class="fas fa-print"></i> Imprimir
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" data-toggle="modal" data-target="#ModalLibrary">
-                            <i class="fas fa-book"></i> Livraria
-                        </a>
-                    </li>
-
-                </ul>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4 sticky-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">
+                    Item Set</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse  navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="sessionStorage.ItensSet=null;location.reload();">
+                                <i class="fas fa-file"></i> Novo
+                            </a>
+                        </li>
+                        <li class="nav-item px-lg-4">
+                            <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="document.getElementById('fileInput').click();">
+                                <i class="far fa-folder-open"></i> Abrir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" v-on:click="download(ItensSet,'itemset')">
+                                <i class="fas fa-download"></i> Salvar
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="print()">
+                                <i class="fas fa-print"></i> Imprimir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" data-toggle="modal" data-target="#ModalLibrary">
+                                <i class="fas fa-book"></i> Livraria
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
-        <div class="container impressaoNao  mt-5 mb-5">
-            <div class="row m-2">
-                <div class="col-md-6 text-center">
-                    <button class=" btn btn-success btn-sm" v-on:click="addItem(tiposItens[0])">Add
+        <section class="page-section cta impressaoNao">
+            <div class="container ">
+                <div class="cta-inner rounded">
+                    <div class="row mt-2 mb-4">
+                        <div class="col-md-6 text-center">
+                            <button class=" btn btn-success btn-sm" v-on:click="addItem(tiposItens[0])">Add
                         Weapon</button></div>
-                <div class="col-md-6 text-center">
-                    <button class=" btn btn-success btn-sm" v-on:click="addItem(tiposItens[1])">Add
+                        <div class="col-md-6 text-center">
+                            <button class=" btn btn-success btn-sm" v-on:click="addItem(tiposItens[1])">Add
                         Armor</button></div>
-            </div>
-            <div class="card m-2" v-for="item in ItensSet.Itens">
-                <div class="card-header">{{item.tipo}}
-                    <button class="float-right btn btn-danger btn-sm"
-                        v-on:click="if(confirm('deseja realmente excluir este item?')){dropItem(item.id)}">
-                        Remove</button>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="form-group col-8">
-                            <label>Name:</label>
-                            <input class="form-control" v-model="item.nome"></textarea>
-                        </div>
-                        <div class="form-group col-4">
-                            <label>CP:</label>
-                            <input class="form-control" readonly v-model="item.capacidadepoder"></textarea>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label>Level:</label>
-                            <select class="form-control" v-model="item.level">
+                    <div class="card mt-2 mb-2" v-for="item in ItensSet.Itens">
+                        <div class="card-header">{{item.tipo}}
+                            <button class="float-right btn btn-danger btn-sm" v-on:click="if(confirm('deseja realmente excluir este item?')){dropItem(item.id)}">
+                        Remove</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-8">
+                                    <label>Name:</label>
+                                    <input class="form-control" v-model="item.nome"></textarea>
+                                </div>
+                                <div class="form-group col-4">
+                                    <label>CP:</label>
+                                    <input class="form-control" readonly v-model="item.capacidadepoder"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label>Level:</label>
+                                    <select class="form-control" v-model="item.level">
                                 <option v-for="level in itemlevels" v-bind:value="level">Level {{level.id}}
                                 </option>
                             </select>
-                        </div>
-                        <div class="form-group col-md-4" v-if="item.tipo == 'Weapon'">
-                            <label>Category:</label>
-                            <select class="form-control" v-model="item.categoria">
+                                </div>
+                                <div class="form-group col-md-4" v-if="item.tipo == 'Weapon'">
+                                    <label>Category:</label>
+                                    <select class="form-control" v-model="item.categoria">
                                 <option v-for="c in categoriaArma" v-bind:value="c">{{c}}</option>
                             </select>
-                        </div>
-                        <div class="form-group col-md-4" v-if="item.tipo == 'Armor'">
-                            <label>Category:</label>
-                            <select class="form-control" v-model="item.categoria">
+                                </div>
+                                <div class="form-group col-md-4" v-if="item.tipo == 'Armor'">
+                                    <label>Category:</label>
+                                    <select class="form-control" v-model="item.categoria">
                                 <option v-for="c in categoriaArmadura" v-bind:value="c">{{c}}</option>
                             </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Power source:</label><br>
-                            <div class="form-check-inline" v-for="(fp,index) in fontesPoder">
-                                <label class="form-check-label">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Power source:</label><br>
+                                    <div class="form-check-inline" v-for="(fp,index) in fontesPoder">
+                                        <label class="form-check-label">
                                     <input type="checkbox" v-bind:id="fp+index" v-bind:value="fp"
                                         v-model="item.fontesPoder" class="form-check-input">
                                     {{fp}}
                                 </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label>Proficiency:</label><br>
-                            <div class="form-check-inline" v-for="(p,index) in Proficiency">
-                                <label class="form-check-label">
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label>Proficiency:</label><br>
+                                    <div class="form-check-inline" v-for="(p,index) in Proficiency">
+                                        <label class="form-check-label">
                                     <input type="checkbox" v-bind:id="p+index" v-bind:value="p"
                                         v-model="item.proficiency" class="form-check-input">
                                     {{p}}
                                 </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row" v-if="item.tipo == 'Weapon'">
-                        <div class="form-group col-md-6">
-                            <label>Damage:
+                            <div class="row" v-if="item.tipo == 'Weapon'">
+                                <div class="form-group col-md-6">
+                                    <label>Damage:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
                                         v-on:click="item.changeDG(-1)">-1</button>
@@ -190,10 +194,10 @@
                                         v-on:click="item.changeDG(1)">+1</button>
                                 </div>
                             </label>
-                            <input type="number" readonly class="form-control" v-model="item.dano">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Attack:
+                                    <input type="number" readonly class="form-control" v-model="item.dano">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Attack:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
                                         v-on:click="item.changeATT(-1)">-1</button>
@@ -201,12 +205,12 @@
                                         v-on:click="item.changeATT(1)">+1</button>
                                 </div>
                             </label>
-                            <input type="number" readonly class="form-control" v-model="item.ataque">
-                        </div>
-                    </div>
-                    <div class="row" v-if="item.tipo == 'Armor'">
-                        <div class="form-group col-md-6">
-                            <label>HP:
+                                    <input type="number" readonly class="form-control" v-model="item.ataque">
+                                </div>
+                            </div>
+                            <div class="row" v-if="item.tipo == 'Armor'">
+                                <div class="form-group col-md-6">
+                                    <label>HP:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
                                         v-on:click="item.changeHP(-1)">-1</button>
@@ -214,10 +218,10 @@
                                         v-on:click="item.changeHP(1)">+1</button>
                                 </div>
                             </label>
-                            <input type="number" readonly class="form-control" v-model="item.hp">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Defense:
+                                    <input type="number" readonly class="form-control" v-model="item.hp">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Defense:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
                                         v-on:click="item.changeDEF(-1)">-1</button>
@@ -225,16 +229,16 @@
                                         v-on:click="item.changeDEF(1)">+1</button>
                                 </div>
                             </label>
-                            <input type="number" readonly class="form-control" v-model="item.defesa">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-9">
-                            <label for="mlevel">Property:</label>
-                            <textarea class="form-control" rows="3" v-model="item.Property"></textarea>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Property CP:
+                                    <input type="number" readonly class="form-control" v-model="item.defesa">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-9">
+                                    <label for="mlevel">Property:</label>
+                                    <textarea class="form-control" rows="3" v-model="item.Property"></textarea>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Property CP:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
                                         v-on:click="item.changePCP(-1)">-1</button>
@@ -242,15 +246,164 @@
                                         v-on:click="item.changePCP(1)">+1</button>
                                 </div>
                             </label>
-                            <input type="number" readonly class="form-control" v-model="item.Propertycp">
+                                    <input type="number" readonly class="form-control" v-model="item.Propertycp">
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
-
-
                 </div>
             </div>
+        </section>
 
-        </div>
+        <section class="page-section about-heading impressaoNao">
+            <div class="container">
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/ataque.jpg" alt="">
+                <div class="about-heading-content">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-10 mx-auto">
+                            <div class="bg-faded rounded p-5">
+                                <h2 class="section-heading mb-4">
+                                    <span class="section-heading-upper">Considerações para criação</span>
+                                    <span class="section-heading-lower">ITENS </span>
+                                </h2>
+                                <ul>
+                                    <li>Cada herói pode equipar uma arma e uma armadura.</li>
+                                    <li>Os itens só podem ser equipados no começo de cada quest.</li>
+                                    <li>Não poderá trocar itens no decorrer de uma quest.</li>
+                                    <li>Os equipamentos possuem uma proficiência:</li>
+                                    <ul>
+                                        <li>Proficiência na Arma (dois combat roles por item): heróis recebem todos os bônus e efeitos descritos do item em todos os seus ataques</li>
+                                        <li>Não proficiência na Arma (demais combat roles): heróis recebem todos os bônus e efeitos descritos do item <strong>apenas nos ataques básicos</strong>.</li>
+                                    </ul>
+                                    <li>Armaduras só podem ser equipadas por 3 combat roles específicos a serem definidos em cada item.</li>
+                                    <li>Personagens Melee só tem proficiência com armas Melee, e o mesmo vale para personagens Ranged. De forma geral a arma que o personagem utiliza não altera seu ataque básico ou a distância de seus ataques. Uma arma específica
+                                        pode fazer isso em seu efeito.</li>
+                                    <li>Os SET de itens só podem ser utilizados pelo combat role definido no item.</li>
+                                    <li>Os itens não podem aplicar efeitos temporários ou permanentes. (não tem componente para marcar) (É possível usar a própria carta para um efeito de uma rodada, mas isso deve ser uma exceção)</li>
+                                    <li>Existem 3 níveis de poder de itens, além de alguns itens especiais ainda mais fortes que serão o Sets Lendários de cada role. (conjuntos de arma e armadura temáticos que quando reunidos no mesmo herói dão um poder extra,
+                                        além de potencializar o poder natural daquele herói. Serão criados um específico para cada Combat Role)</li>
+                                    <li>Por nível haverão 16 armas e 16 armaduras, divididas nas seguintes categorias:</li>
+                                </ul>
+                                <p>   <strong>WEAPONS</strong></p>
+                                <ul>
+                                    <li><strong>Melees</strong></li>
+                                </ul>
+                                <ul>
+                                    <li><strong> Rangeds</strong></li>
+                                </ul>
+                                <p> <strong>ARMORS</strong></p>
+                                <ul>
+                                    <li><strong>8 Heavy</strong></li>
+                                </ul>
+                                <ul>
+                                    <li><strong>Light</strong></li>
+                                </ul>
+                                <p>  <strong>TABELA DE LIMITE DE BÔNUS:</strong> </p>
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>Itens</p>
+                                            </td>
+                                            <td>
+                                                <p>Limite Total: <br />Level Up + Itens</p>
+                                            </td>
+                                            <td>
+                                                <p>Limite:<br />Level UP</p>
+                                            </td>
+                                            <td>
+                                                <p>Limite:<br />Item</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Arma</p>
+                                            </td>
+                                            <td>
+                                                <p>Attack Roll: +5</p>
+                                            </td>
+                                            <td>
+                                                <p>+2</p>
+                                            </td>
+                                            <td>
+                                                <p>+3 </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Arma</p>
+                                            </td>
+                                            <td>
+                                                <p>Damage: +8</p>
+                                            </td>
+                                            <td>
+                                                <p>+4</p>
+                                            </td>
+                                            <td>
+                                                <p>+4</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Armadura</p>
+                                            </td>
+                                            <td>
+                                                <p>HP: +40</p>
+                                            </td>
+                                            <td>
+                                                <p>+20 </p>
+                                            </td>
+                                            <td>
+                                                <p>+20</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Armadura</p>
+                                            </td>
+                                            <td>
+                                                <p>Defense: +5 </p>
+                                            </td>
+                                            <td>
+                                                <p>+2</p>
+                                            </td>
+                                            <td>
+                                                <p>+3</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>Deve-se manter atenção a estes números para que o total de ganhos do Level Up dos personagens somado a seus itens não cheguem a valores superiores a estes. Ou seja, o maior valor que uma arma pode dar para o ataque é +3,
+                                    e para o dano +4. Uma armadura não deve dar mais do que 20 de HP, ou 3 de Defense.</p>
+                                <p> </p>
+                                <p><strong>VALORES DE BALANCEAMENTO:</strong></p>
+                                <p><br />Para realizarem o balanceamento do jogo considerem que as seguintes opções se equivalem, sendo chamadas neste documento como 1 CP, ou 1 de Capacidade de Poder.</p>
+                                <p>É possível retirar ou ampliar coisas de qualquer item ou ataque e adicionar em outros locais utilizando as proporções da tabela a seguir.</p>
+                                <p>É importante notar que estes valores são atribuídos como medida de comparação, ou seja, seu item, ataque ou monstro não deve ter efeitos além daqueles que foram pagos com os CP’s. Todos os efeitos devem ser levados em consideração.
+                                    Os valores não se tratam de um número base para efeitos genéricos onde mais efeitos específicos ainda podem ser aplicados em cima. O seu item, ataque ou monstro deve ser equilibrado com uma versão simples e sem efeitos
+                                    utilizando os números contidos nas tabelas. </p>
+                                <p><strong>Como parâmetro, 1 ponto de Capacidade de Poder é igual a:</strong></p>
+                                <ul>
+                                    <li><em>+2 damage</em></li>
+                                    <li><em>+1 to hit</em></li>
+                                    <li><em>+10 HP</em></li>
+                                    <li><em>+1 Defense</em><em><br /></em><em>(Esta proporção vale para Itens, Ataques e coisas referentes aos jogadores. No caso dos vilões, o HP é somente +5)</em></li>
+                                </ul>
+                                <p> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer text-faded text-center py-5">
+            <div class="container">
+                <p class="m-0 small"> Casa do Goblin 2020</p>
+            </div>
+        </footer>
 
         <div class="modal" id="ModalLibrary">
             <div class="modal-dialog modal-lg">
@@ -271,6 +424,15 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="js/item.js"></script>
+    <script src="js/enum.js"></script>
+    <script src="js/helper.js"></script>
+
     <script>
         var myObject = new Vue({
             el: '#app',
@@ -280,18 +442,18 @@
                 },
 
             },
-            created: function () {
+            created: function() {
                 if (sessionStorage.ItensSet != "null" && sessionStorage.ItensSet != "undefined") {
                     this.jsonToItens(sessionStorage.ItensSet);
                 }
             },
-            mounted: function () {
+            mounted: function() {
                 document.addEventListener('focus', this.saveSession, true);
                 loadLibrary('librarycontent');
 
             },
             methods: {
-                addItem: function (tipo) {
+                addItem: function(tipo) {
                     item = new Item({
                         id: this.create_UUID(),
                         proficiency: [],
@@ -313,14 +475,16 @@
                     this.ItensSet.Itens.push(item);
 
                 },
-                dropItem: function (itemId) {
-                    let removeIndex = this.ItensSet.Itens.map(function (item) { return item.id; }).indexOf(itemId);
+                dropItem: function(itemId) {
+                    let removeIndex = this.ItensSet.Itens.map(function(item) {
+                        return item.id;
+                    }).indexOf(itemId);
                     this.ItensSet.Itens.splice(removeIndex, 1);
                 },
-                saveSession: function () {
+                saveSession: function() {
                     sessionStorage.ItensSet = JSON.stringify(this.ItensSet);
                 },
-                download: function () {
+                download: function() {
                     let element = document.createElement('a');
                     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.ItensSet)));
                     element.setAttribute('download', "itens");
@@ -332,21 +496,21 @@
 
                     document.body.removeChild(element);
                 },
-                getFile: function (event) {
+                getFile: function(event) {
                     let file = event.target.files[0];
                     let reader = new FileReader();
                     reader.onload = this.loadobj;
                     reader.readAsText(file);
 
                 },
-                loadobj: function (evt) {
+                loadobj: function(evt) {
                     try {
                         this.jsonToItens(evt.target.result);
                     } catch (error) {
                         alert(error);
                     }
                 },
-                jsonToItens: function (stringJson) {
+                jsonToItens: function(stringJson) {
                     try {
                         let loadobj = JSON.parse(stringJson);
                         itens = [];
@@ -378,9 +542,9 @@
                     }
 
                 },
-                create_UUID: function () {
+                create_UUID: function() {
                     let dt = new Date().getTime();
-                    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                         let r = (dt + Math.random() * 16) % 16 | 0;
                         dt = Math.floor(dt / 16);
                         return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);

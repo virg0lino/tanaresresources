@@ -2,30 +2,34 @@
 <html lang="en">
 
 <head>
-    <title>Tanares Adventures - ataques</title>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="ataque.js"></script>
-    <script src="enum.js"></script>
-    <script src="helper.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>tanares resource maker - Attack set</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/business-casual.min.css" rel="stylesheet">
+
+
 
     <style>
         @media print {
             .impressaoNao {
                 display: none;
             }
-
             .impressao {
                 display: block;
             }
         }
-
+        
         @media screen {
             .impressao {
                 display: none;
@@ -41,224 +45,282 @@
 
         <div class="impressao">
             Pack de ataques para {{heroAtaque.role}}<br>
-            <div class="card" v-for="ataque in heroAtaque.ataques">
+            <div class="card m-4 border-0" v-for="ataque in heroAtaque.ataques">
                 <div class="card-body">
-                    {{ataque.nome}}<br>
-                    ({{ataque.fontedepoder.toString()}}) - Level ({{ataque.level.id}})<br>
-                    Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
-                    <div v-if="ataque.handpower!=''">Handpower <span
-                            v-if="ataque.handpowercp!=0">(CP={{ataque.handpowercp}})</span>: {{ataque.handpower}}<br>
+                    {{ataque.nome}}<br> ({{ataque.fontedepoder.toString()}}) - Level ({{ataque.level.id}})<br> Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
+                    <div v-if="ataque.handpower!=''">Handpower <span v-if="ataque.handpowercp!=0">(CP={{ataque.handpowercp}})</span>: {{ataque.handpower}}<br>
                     </div>
-                    <div v-if="ataque.beneficio!=''">Beneft <span
-                            v-if="ataque.beneficiocp!=0">(CP={{ataque.beneficiocp}})</span>: {{ataque.beneficio}}<br>
+                    <div v-if="ataque.beneficio!=''">Beneft <span v-if="ataque.beneficiocp!=0">(CP={{ataque.beneficiocp}})</span>: {{ataque.beneficio}}<br>
                     </div>
-                    <div v-if="ataque.penalidade!=''">Drawback <span
-                            v-if="ataque.penalidadecp!=0">(CP={{ataque.penalidadecp}})</span>: {{ataque.penalidade}}<br>
+                    <div v-if="ataque.penalidade!=''">Drawback <span v-if="ataque.penalidadecp!=0">(CP={{ataque.penalidadecp}})</span>: {{ataque.penalidade}}<br>
                     </div>
                     Hit: ({{ataque.danoacerto}}) damage + effect<br>
                     <div v-if="ataque.danoerro!=''">Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
-                    <div v-if="ataque.efeito!=''">Effect <span
-                            v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: {{ataque.efeito}}<br></div>
+                    <div v-if="ataque.efeito!=''">Effect <span v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: {{ataque.efeito}}<br></div>
                 </div>
             </div>
         </div>
 
-        <div class="container-fluid text-center impressaoNao">
-            <h1>Heroes Attack </h1>
-            <p>criando pack de ataque!</p>
-        </div>
 
-        <nav class="navbar navbar-expand-md bg-info navbar-dark sticky-top">
-            <!-- Brand -->
-            <a class="navbar-brand" href="#!" onclick="window.location.href='index.html'">
-                <i class="fas fa-arrow-left"></i> Heroes Attacks</a>
+        <h1 class="site-heading text-center text-white d-none d-lg-block">
+            <span class="site-heading-upper text-primary mb-3">BUILD POSSIBILITIES</span>
+            <span class="site-heading-lower">Attack Set</span>
+        </h1>
 
-            <!-- Toggler/collapsibe Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar links -->
-            <div class="collapse navbar-collapse " id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" onclick="sessionStorage.ataques=null;location.reload();"> 
-                            <i class="fas fa-file"></i> Novo
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
-                        <a class="nav-link" href="#!" onclick="document.getElementById('fileInput').click();">
-                            <i class="far fa-folder-open"></i> Abrir
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" v-on:click="download(heroAtaque,'Ataquesherois')">
-                            <i class="fas fa-download"></i> Salvar
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" onclick="print()">
-                            <i class="fas fa-print"></i> Imprimir
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!" data-toggle="modal" data-target="#ModalLibrary">
-                            <i class="fas fa-book"></i> Livraria
-                        </a>
-                    </li>
-
-                </ul>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4 sticky-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">
+                    Attack Set</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse  navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="sessionStorage.ataques=null;location.reload();">
+                                <i class="fas fa-file"></i> Novo
+                            </a>
+                        </li>
+                        <li class="nav-item px-lg-4">
+                            <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="document.getElementById('fileInput').click();">
+                                <i class="far fa-folder-open"></i> Abrir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" v-on:click="download(heroAtaque,'Ataquesherois')">
+                                <i class="fas fa-download"></i> Salvar
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="print()">
+                                <i class="fas fa-print"></i> Imprimir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" data-toggle="modal" data-target="#ModalLibrary">
+                                <i class="fas fa-book"></i> Livraria
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
-        <div class="container impressaoNao mt-5 mb-5">
-            <div class=" card row">
-                <div class="form-group col">
-                    <label>Role:</label>
-                    <select class="form-control" v-model="heroAtaque.role">
-                        <option v-for="rol in Proficiency" v-bind:value="rol">{{rol}}</option>
-                    </select>
-                </div>
-            </div>
-            <div v-for="(ataque,index) in heroAtaque.ataques" :key="ataque.id">
-                <div class="card m-2">
-                    <div class="card-header">
-                        <input type="hidden" v--model="ataque.level">
-                        Attack level: {{ataque.level.id}}
-                    </div>
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="form-group col-8">
-                                <label for="mlevel">Name:</label>
-                                <input class="form-control" v-model="ataque.nome"></textarea>
-                            </div>
-                            <div class="form-group col-4">
-                                <label for="mlevel">CP:</label>
-                                <input class="form-control" readonly v-model="ataque.capacidadepoder"></textarea>
-                            </div>
+        <section class="page-section cta impressaoNao">
+            <div class="container ">
+                <div class="cta-inner rounded">
+                    <div class="card">
+                        <div class="card-body form-group">
+                            <label>Role:</label>
+                            <select class="form-control" v-model="heroAtaque.role">
+                                        <option v-for="rol in Proficiency" v-bind:value="rol">{{rol}}</option>
+                                    </select>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label>Range:</label>
-                                <select class="form-control" v-model="ataque.alcance">
-                                    <option v-for="alc in alcances" v-bind:value="alc">{{alc}} square</option>
-                                </select>
+                    </div>
+                    <div v-for="(ataque,index) in heroAtaque.ataques" :key="ataque.id">
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <input type="hidden" v--model="ataque.level"> Attack level: {{ataque.level.id}}
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="mlevel">Target:</label>
-                                <input class="form-control" v-model="ataque.alvo">
+                            <div class="card-body">
 
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="mlevel">Power source:</label><br>
-                                <div class="form-check-inline" v-for="(fp,index) in fontesPoder">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" v-bind:id="fp+index" v-bind:value="fp"
-                                            v-model="ataque.fontedepoder" class="form-check-input">
-                                        {{fp}}
-                                    </label>
+                                <div class="row">
+                                    <div class="form-group col-8">
+                                        <label for="mlevel">Name:</label>
+                                        <input class="form-control" v-model="ataque.nome"></textarea>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="mlevel">CP:</label>
+                                        <input class="form-control" readonly v-model="ataque.capacidadepoder"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>Range:</label>
+                                        <select class="form-control" v-model="ataque.alcance">
+                                                    <option v-for="alc in alcances" v-bind:value="alc">{{alc}} square
+                                                    </option>
+                                                </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="mlevel">Target:</label>
+                                        <input class="form-control" v-model="ataque.alvo">
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="mlevel">Power source:</label><br>
+                                        <div class="form-check-inline" v-for="(fp,index) in fontesPoder">
+                                            <label class="form-check-label">
+                                                        <input type="checkbox" v-bind:id="fp+index" v-bind:value="fp"
+                                                            v-model="ataque.fontedepoder" class="form-check-input">
+                                                        {{fp}}
+                                                    </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" v-if="ataque.level.id === 3">
+                                    <div class="form-group col-md-9">
+                                        <label for="mlevel">Handpower:</label>
+                                        <textarea class="form-control" rows="3" v-model="ataque.handpower"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Handpower CP:
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-warning"
+                                                            v-on:click="ataque.changeHCP(-1)">-1</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            v-on:click="ataque.changeHCP(1)">+1</button>
+                                                    </div>
+                                                </label>
+                                        <input type="number" readonly class="form-control" v-model="ataque.handpowercp">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Beneft:</label>
+                                        <textarea class="form-control" rows="3" v-model="ataque.beneficio"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Beneft CP:
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-warning"
+                                                            v-on:click="ataque.changeBCP(-1)">-1</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            v-on:click="ataque.changeBCP(1)">+1</button>
+                                                    </div>
+                                                </label>
+                                        <input type="number" readonly class="form-control" v-model="ataque.beneficiocp">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Drawback:</label>
+                                        <textarea class="form-control" rows="3" v-model="ataque.penalidade"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="txtacp">Drawback CP:
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-warning"
+                                                            v-on:click="ataque.changePCP(-1)">-1</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            v-on:click="ataque.changePCP(1)">+1</button>
+                                                    </div>
+                                                </label>
+                                        <input type="number" readonly class="form-control" v-model="ataque.penalidadecp">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Hit:
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-warning"
+                                                            v-on:click="ataque.changeDG(-1)">-1</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            v-on:click="ataque.changeDG(1)">+1</button>
+                                                    </div>
+                                                </label>
+                                        <input class="form-control" readonly v-model="ataque.danoacerto"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Miss:
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-warning"
+                                                            v-on:click="ataque.changeCP(-0.5)">-1</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            v-on:click="ataque.changeCP(0.5)">+1</button>
+                                                    </div>Livre
+                                                </label>
+                                        <input class="form-control" v-model="ataque.danoerro"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Effect :</label>
+                                        <textarea class="form-control" rows="3" v-model="ataque.efeito"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Effect CP:
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-warning"
+                                                            v-on:click="ataque.changeECP(-1)">-1</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            v-on:click="ataque.changeECP(1)">+1</button>
+                                                    </div>
+                                                </label>
+                                        <input type="number" readonly class="form-control" v-model="ataque.efeitocp">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                        <div class="row" v-if="ataque.level.id === 3">
-                            <div class="form-group col-md-9">
-                                <label for="mlevel">Handpower:</label>
-                                <textarea class="form-control" rows="3" v-model="ataque.handpower"></textarea>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Handpower CP:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="ataque.changeHCP(-1)">-1</button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="ataque.changeHCP(1)">+1</button>
-                                    </div>
-                                </label>
-                                <input type="number" readonly class="form-control" v-model="ataque.handpowercp">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-9">
-                                <label>Beneft:</label>
-                                <textarea class="form-control" rows="3" v-model="ataque.beneficio"></textarea>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Beneft CP:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="ataque.changeBCP(-1)">-1</button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="ataque.changeBCP(1)">+1</button>
-                                    </div>
-                                </label>
-                                <input type="number" readonly class="form-control" v-model="ataque.beneficiocp">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-9">
-                                <label>Drawback:</label>
-                                <textarea class="form-control" rows="3" v-model="ataque.penalidade"></textarea>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="txtacp">Drawback CP:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="ataque.changePCP(-1)">-1</button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="ataque.changePCP(1)">+1</button>
-                                    </div>
-                                </label>
-                                <input type="number" readonly class="form-control" v-model="ataque.penalidadecp">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label>Hit:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="ataque.changeDG(-1)">-1</button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="ataque.changeDG(1)">+1</button>
-                                    </div>
-                                </label>
-                                <input class="form-control" readonly v-model="ataque.danoacerto"></textarea>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Miss:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="ataque.changeCP(-0.5)">-1</button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="ataque.changeCP(0.5)">+1</button>
-                                    </div>Livre
-                                </label>
-                                <input class="form-control" v-model="ataque.danoerro"></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-9">
-                                <label>Effect :</label>
-                                <textarea class="form-control" rows="3" v-model="ataque.efeito"></textarea>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Effect CP:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="ataque.changeECP(-1)">-1</button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="ataque.changeECP(1)">+1</button>
-                                    </div>
-                                </label>
-                                <input type="number" readonly class="form-control" v-model="ataque.efeitocp">
+        <section class="page-section about-heading impressaoNao">
+            <div class="container">
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/ataque.jpg" alt="">
+                <div class="about-heading-content">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-10 mx-auto">
+                            <div class="bg-faded rounded p-5">
+                                <h2 class="section-heading mb-4">
+                                    <span class="section-heading-upper">Considerações para criação</span>
+                                    <span class="section-heading-lower">ATAQUES DE HERÓIS</span>
+                                </h2>
+                                <ul>
+                                    <li>Os ataques à serem desenvolvidos são Primary Attacks.</li>
+                                    <li>Eles irão compor uma mão de cartas que irá incluir os 2 primary ataques originais do personagem, mais qualquer um destes novos primary attacks que ele aprender.</li>
+                                    <li>Sempre que utilizar um primary attack o jogador deverá descartar aquela carta. Quando ele não possuir mais primary attacks em sua mão, ele recolhe novamente todos os seus primary attacks para sua mão, ficando eles novamente
+                                        disponíveis para uso. (Essa regra altera o funcionamento dos primary attacks no jogo original.) - É possível utilizar deste fato, de que a carta está “descartada” para que ela confira algum efeito sobre o jogador
+                                        enquanto ela assim estiver.</li>
+                                    <li>Os ataque serão novas habilidades que os jogadores poderão escolher para seus personagens durante a campanha PVE. No final da campanha cada jogador terá conseguido 2 ataques de level 1, 1 ataque de level 2, e 1 ataque
+                                        de level 3.</li>
+                                    <li>Os ataques são genéricos para um <strong>role</strong> de personagem. Cada <strong>role</strong> terá um “pool” de 6 ataques de level 1, 3 ataques de level 2, e 3 ataques de level 3, que servirão como as opções de evolução
+                                        de ataques dos personagens durante a campanha. Ou seja, em determinado momento da campanha o jogador irá receber como recompensa um “ataque de nível 1”, podendo então pegar todas as cartas de ataque de nível 1 de
+                                        seu role, e escolher um para adicionar a sua mão de habilidades.</li>
+                                    <li>Os ataques criados devem ser complementares a função do role que fazem parte.</li>
+                                    <li>Os ataques criados não podem ser special attacks. Porém é possível fazer um ataque de interaja de alguma forma com o token de especial, mas isso é uma exceção. </li>
+                                    <li>Os novos ataque de heróis não podem ter efeito permanente nem ser de interrupção.</li>
+                                    <li>Sempre considerar a concordância do ataque proposto com o Combat Role (Melees: Brute, Bruiser, Tactician, Tank - Rangeds: Healer, Shooter, Controler, Comander):</li>
+                                    <li>É importante que diversos ataques tenham efeitos condicionais que envolvam o inimigo estar afetado por uma fonte de poder diferente daquela que o próprio personagem pode aplicar sozinho, permitindo assim combos de ataques.</li>
+                                    <li>São interessantes habilidades que permitam descartar cartas de ataque ou recuperar cartas de ataque descartadas, mas elas precisam ser aplicadas com cuidado pois são difíceis de balancear. É possível fazê-lo com base
+                                        na efetividade média de uma rotação da mão.</li>
+                                    <li>Também são interessantes ataques com efeitos condicionados a outros efeitos, como um efeito que acontece somente se o alvo estiver exposed por exemplo. Isso permite novas combinações entre ataques de diferentes personagens.</li>
+                                    <li>Em média um ataque tem a seguinte capacidade de poder:</li>
+                                    <ul>
+                                        <li><strong>Nível 1</strong>: 14 pontos de dano (equivalente a um primary attack de personagem) (Miss: 5 Residual em média)</li>
+                                        <li><strong>Nível 2</strong>: 18 pontos de dano (entre um ataque primary e um especial.) (Miss: 8 Residual em média)</li>
+                                        <li><strong>Nível 3</strong>: 22 pontos de dano (equivalente a um especial de personagem) (Miss: 10 Residual em média)</li>
+                                        <li>Os ataques criados devem ser equilibrados quando comparados com um ataque que não possui nenhum efeito, atinge um único alvo e tem este dano marcado. Ou seja, a não ser que seu ataque tenha drawbacks fortes, ele
+                                            nunca pode passar destes valores de dano, e geralmente devem ficar bem abaixo deles a depender de quão poderosos são os efeitos que seu ataque provém, ou qual o número de alvos que ele afeta.</li>
+                                    </ul>
+                                    <li>Sabendo que:</li>
+                                    <ul>
+                                        <li>dano direto é melhor que cura</li>
+                                        <li>dano em um único alvo concentrado é melhor do dado espalhado</li>
+                                        <li>rolagem única é melhor que necessidade de múltiplas rolagens</li>
+                                    </ul>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <footer class="footer text-faded text-center py-5">
+            <div class="container">
+                <p class="m-0 small"> Casa do Goblin 2020</p>
+            </div>
+        </footer>
 
         <div class="modal" id="ModalLibrary">
             <div class="modal-dialog modal-lg">
@@ -278,7 +340,15 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="js/ataque.js"></script>
+    <script src="js/enum.js"></script>
+    <script src="js/helper.js"></script>
 
     <script>
         var myObject = new Vue({
@@ -289,12 +359,12 @@
                     ataques: [],
                 },
             },
-            created: function () {
+            created: function() {
                 for (let index = 0; index < attacklevels.length; index++) {
                     let ataque = new Ataque();
                     ataque.level = attacklevels[index];
                     ataque.alcance = alcances[index];
-                    
+
                     this.heroAtaque.ataques.push(ataque);
                 }
                 if (sessionStorage.ataques != "null" && sessionStorage.ataques != "undefined") {
@@ -302,15 +372,15 @@
                 }
 
             },
-            mounted: function () {
+            mounted: function() {
                 document.addEventListener('focus', this.saveSession, true);
                 loadLibrary('librarycontent');
             },
             methods: {
-                saveSession: function () {
+                saveSession: function() {
                     sessionStorage.ataques = JSON.stringify(this.heroAtaque);
                 },
-                download: function () {
+                download: function() {
                     let element = document.createElement('a');
                     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.heroAtaque)));
                     element.setAttribute('download', this.heroAtaque.role != "" ? this.heroAtaque.role : "ataque");
@@ -322,21 +392,21 @@
 
                     document.body.removeChild(element);
                 },
-                getFile: function (event) {
+                getFile: function(event) {
                     let file = event.target.files[0];
                     let reader = new FileReader();
                     reader.onload = this.loadataques;
                     reader.readAsText(file);
 
                 },
-                loadataques: function (evt) {
+                loadataques: function(evt) {
                     try {
                         this.jsonToAtaques(evt.target.result);
                     } catch (error) {
                         alert(error);
                     }
                 },
-                jsonToAtaques: function (stringJson) {
+                jsonToAtaques: function(stringJson) {
                     try {
                         let loadataque = JSON.parse(stringJson);
                         this.heroAtaque.role = loadataque.role;
