@@ -33,6 +33,26 @@ class Monstro {
         this.cp = level.cp + this.cor.cp;
         this.fcp = 0;
         this.acp = 0;
+
+        this.attack[0].handpowercp = 0;
+        this.attack[0].beneficiocp = 0;
+        this.attack[0].penalidadecp = 0;
+        switch (level.id) {
+            case 1:
+                this.attack[0].danoerro = 5;
+                break;
+            case 2:
+                this.attack[0].danoerro = 8;
+                break;
+            case 3:
+                this.attack[0].danoerro = 10;
+                break;
+            default:
+                this.attack[0].danoerro = 0;
+                break;
+        }
+        this.attack[0].efeitocp = 0;
+        this.attack[0].capacidadepoder = 0;
     }
 
     get cor() {
@@ -43,17 +63,17 @@ class Monstro {
         this.cp = this.level.cp + color.cp;
     }
 
-    addAtaque(ataque){
+    addAtaque(ataque) {
         this.attack.push(ataque);
     }
 
-    dropAtaque(index){
+    dropAtaque(index) {
         this.cp -= this.attack[index].capacidadepoder;
         this.attack.splice(index, 1);
     }
 
-    changeCP(valor){
-        this.cp -=valor;
+    changeCP(valor) {
+        this.cp -= valor;
     }
 
     changeHP(valor) {
@@ -80,9 +100,9 @@ class Monstro {
         this.cp -= valor;
 
         if (valor > 0) {
-            this.dg += 2/2;
+            this.dg += 2 / 2;
         } else {
-            this.dg -= 2/2;
+            this.dg -= 2 / 2;
         }
     }
 
@@ -97,12 +117,12 @@ class Monstro {
     }
 
     changeFCP(valor) {
-        this.cp -= valor/2;
-        this.fcp += valor/2;
+        this.cp -= valor / 2;
+        this.fcp += valor / 2;
     }
 
     changeACP(valor) {
-        this.cp -= valor/2;
-        this.acp += valor/2;
+        this.cp -= valor / 2;
+        this.acp += valor / 2;
     }
 }
