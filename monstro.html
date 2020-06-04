@@ -228,8 +228,8 @@
                             <div class="row mt-1 mb-2">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="monster.hasSpecial">
-                                        <label class="custom-control-label" for="customSwitch1">Special Attack</label>
+                                        <input type="checkbox" class="custom-control-input" v-bind:id="'customSwitch'+index" v-model="monster.hasSpecial">
+                                        <label class="custom-control-label" v-bind:for="'customSwitch'+index">Special Attack</label>
                                     </div>
                                 </div>
                             </div>
@@ -567,6 +567,7 @@
                         }
 
                         this.monsters[index].strategy = loadmonster[index].strategy;
+                        this.monsters[index].hasSpecial = loadmonster[index].hasSpecial;
                     }
                 },
 
