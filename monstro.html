@@ -167,9 +167,9 @@
                                     <label for="txthp">HP:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeHP(-1)">-1</button>
+                                            v-on:click="monster.changeHP(-1)"><i class="fas fa-caret-down"></i></button>
                                         <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeHP(1)">+1</button>
+                                            v-on:click="monster.changeHP(1)"><i class="fas fa-caret-up"></i></button>
                                     </div>
                                 </label>
                                     <input type="number" readonly class="form-control" v-model="monster.hp">
@@ -178,9 +178,9 @@
                                     <label>Basic Attack:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeBA(-1)">-1</button>
+                                            v-on:click="monster.changeBA(-1)"><i class="fas fa-caret-down"></i></button>
                                         <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeBA(1)">+1</button>
+                                            v-on:click="monster.changeBA(1)"><i class="fas fa-caret-up"></i></button>
                                     </div>
                                 </label>
                                     <input type="number" readonly class="form-control" v-model="monster.ba">
@@ -189,9 +189,9 @@
                                     <label>Def:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeDF(-1)">-1</button>
+                                            v-on:click="monster.changeDF(-1)"><i class="fas fa-caret-down"></i></button>
                                         <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeDF(1)">+1</button>
+                                            v-on:click="monster.changeDF(1)"><i class="fas fa-caret-up"></i></button>
                                     </div>
                                 </label>
                                     <input type="number" readonly class="form-control" v-model="monster.def">
@@ -217,9 +217,9 @@
                                     <label for="txtfcp">Features CP:
                                     <div class="btn-group btn-group-sm">
                                         <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeFCP(-1)">-1</button>
+                                            v-on:click="monster.changeFCP(-0.5)"><i class="fas fa-caret-down"></i></button>
                                         <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeFCP(1)">+1</button>
+                                            v-on:click="monster.changeFCP(0.5)"><i class="fas fa-caret-up"></i></button>
                                     </div>
                                 </label>
                                     <input type="number" readonly class="form-control" v-model="monster.fcp">
@@ -284,9 +284,9 @@
                                                     <label>Beneft CP:
                                                                 <div class="btn-group btn-group-sm">
                                                                     <button type="button" class="btn btn-warning"
-                                                                        v-on:click="monster.changeCP(ataque.changeBCP(-1))">-1</button>
+                                                                        v-on:click="monster.changeCP(ataque.changeBCP(-0.5))"><i class="fas fa-caret-down"></i></button>
                                                                     <button type="button" class="btn btn-primary"
-                                                                        v-on:click="monster.changeCP(ataque.changeBCP(1))">+1</button>
+                                                                        v-on:click="monster.changeCP(ataque.changeBCP(0.5))"><i class="fas fa-caret-up"></i></button>
                                                                 </div>
                                                             </label>
                                                     <input type="number" readonly class="form-control" v-model="ataque.beneficiocp">
@@ -301,9 +301,9 @@
                                                     <label for="txtacp">Drawback CP:
                                                                 <div class="btn-group btn-group-sm">
                                                                     <button type="button" class="btn btn-warning"
-                                                                        v-on:click="monster.changeCP(ataque.changePCP(-1))">-1</button>
+                                                                        v-on:click="monster.changeCP(ataque.changePCP(-0.5))"><i class="fas fa-caret-down"></i></button>
                                                                     <button type="button" class="btn btn-primary"
-                                                                        v-on:click="monster.changeCP(ataque.changePCP(1))">+1</button>
+                                                                        v-on:click="monster.changeCP(ataque.changePCP(0.5))"><i class="fas fa-caret-up"></i></button>
                                                                 </div>
                                                             </label>
                                                     <input type="number" readonly class="form-control" v-model="ataque.penalidadecp">
@@ -314,9 +314,9 @@
                                                     <label>Hit:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeDG(ataque.changeDG(-1));">-1</button>
+                                                            v-on:click="monster.changeDG(ataque.changeDG(-1));"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeDG(ataque.changeDG(1));">+1</button>
+                                                            v-on:click="monster.changeDG(ataque.changeDG(1));"><i class="fas fa-caret-up"></i></button>
                                                     </div>
                                                 </label>
                                                     <input class="form-control" readonly v-model="monster.dg"></textarea>
@@ -325,11 +325,11 @@
                                                     <label>Hit:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));">-1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));">+1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));"><i class="fas fa-caret-up"></i></button>
                                                     </div>
-                                                    livre
+                                                     Livre
                                                 </label>
                                                     <input class="form-control" v-model="monster.dg"></textarea>
                                                 </div>
@@ -337,11 +337,11 @@
                                                     <label>Miss:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));">-1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));">+1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));"><i class="fas fa-caret-up"></i></button>
                                                     </div>
-                                                    livre
+                                                     Livre
                                                 </label>
                                                     <input class="form-control" v-model="ataque.danoerro"></textarea>
                                                 </div>
@@ -355,9 +355,9 @@
                                                     <label>Effect CP:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeECP(-1))">-1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeECP(-0.5))"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeECP(1))">+1</button>
+                                                            v-on:click="monster.changeCP(ataque.changeECP(0.5))"><i class="fas fa-caret-up"></i></button>
                                                     </div>
                                                 </label>
                                                     <input type="number" readonly class="form-control" v-model="ataque.efeitocp">
@@ -393,60 +393,353 @@
                                 <span class="section-heading-lower">Monstros </span>
                             </h2>
                             <ul>
-                                <li>Os designers são livres para dar suas interpretações temáticas aos monstros, mantendo em mente um cenário de fantasia clássico.</li>
+                                <li>Cada desenvolvedor irá criar 4 monstros distintos, todos do mesmo nível, conforme a tabela ao final desta seção do documento. Os seus status serão parte de uma carta em tamanho padrão.<br /><br /></li>
+                                <li>Cada monstro, dos 4 de cada grupo, terá estatísticas únicas e habilidades diversas. É importante que cada um deles tenha efeitos em seus ataques, e que cada um possua uma estratégia básica distinta.<br /><br /></li>
+                                <li>Podem existir monstros com ataque especial (inclusive com efeito permanente), mas após esse ataque o monstro só atacará com Basic Attack.<br /><br /></li>
+                                <li>Os monstros devem ser construídos de forma que funcionem tanto como um grupo, quanto separadamente em grupos sortidos de monstros diferentes.<br /><br /></li>
+                                <li>Os designers são livres para dar suas interpretações temáticas aos monstros, mantendo em mente um cenário de fantasia clássico.<br /><br /></li>
                                 <li>Existirão 4 miniaturas para cada tipo de monstro, e cada uma delas será anexada a uma base de cor distinta para que se possa identificar qual inimigo é qual carta de monstro. As cores são: Vermelho, Laranja, Azul e Verde.
-                                    Cada carta de monstro deve identificar a cor da base de sua miniatura.</li>
-                                <li>Monstros de base Vermelha e Laranja devem ser um pouco mais fortes que os demais, recebendo 1 CP extra, conforme descrito abaixo nas regras de construção de monstros.</li>
-                                <li>Monstros têm em geral um movimento de valor 6. Mudanças nos movimentos devem ser feitas com cuidado para evitar que o monstro perca turnos sem conseguir atacar nenhum jogador por questão de distância.</li>
+                                    Cada carta de monstro deve identificar a cor da base de sua miniatura.<br /><br /></li>
+                                <li>Monstros de base Vermelha e Laranja devem ser um pouco mais fortes que os demais, recebendo 1 CP extra, conforme descrito abaixo nas regras de construção de monstros.<br /><br /></li>
+                                <li>Monstros têm em geral um movimento de valor 6. Mudanças nos movimentos devem ser feitas com cuidado para evitar que o monstro perca turnos sem conseguir atacar nenhum jogador por questão de distância.<br /><br /></li>
                                 <li>Cada monstro terá uma carta de tamanho MINI-EURO que conterá as informações de seu ataque, e poderá ser utilizada para marcar efeitos. Efeitos permanentes só podem existir em caso do monstro ser um special attack, o que
-                                    fará com que o monstro só utilize ataques básicos após tê-lo utilizado. (Esta carta é em adição a carta tamanho normal que contém as estatísticas do monstro.)</li>
-                                <li>Somente ataques possuem fonte de dano. As criaturas somente tem um tipo, como humanoide ou undead.</li>
+                                    fará com que o monstro só utilize ataques básicos após tê-lo utilizado. (Esta carta é em adição a carta tamanho normal que contém as estatísticas do monstro.)<br /><br /></li>
+                                <li>Os ataques dos monstros devem ter uma fonte de dano. O monsro em si não possui uma fonte de dano, mas sim um tipo de criatura como humanoide ou undead, por exemplo.</li>
                             </ul>
-                            <p> </p>
                             <p><strong>Categorias de Monstros:</strong></p>
                             <p>Boss, Humanoid, Magic Beast and Undead</p>
-                            <p> </p>
+                            <p>Proporções de tipos de monstros existentes: (<em>para ajudar no balanceamento de ataque</em>s)<br />(<em>Tratam-se de quantos monstros existem de cada tipo!</em>)</p>
+                            <p>Magic Beast: 8<br />Undead: 6<br />Humanoid: 11</p>
                             <p><strong>VALORES DE BALANCEAMENTO DE MONSTROS:</strong></p>
                             <p>Assim como para os itens a mesma regra de CP se aplica aos monstros e vilões em geral.</p>
                             <p><strong>Legenda/Conversão para Capacidade de Poder (CP) de Vilão:</strong></p>
                             <p>1 CP é igual:</p>
                             <ul>
                                 <li>+1 no ataque/defesa</li>
-                                <li>+2 no dano</li>
+                                <li>+1 no dano</li>
                                 <li>+5 HP</li>
-                                <li>Efeito (variável)</li>
                                 <li>+4 dano com alguma condição especial<br /><em>(Estas proporções valem para os vilões, para os itens e habilidades de heróis, o HP vale +10.)</em></li>
                             </ul>
-                            <p> <strong>Feature (propriedade passiva), exemplos de +1:</strong></p>
+                            <p><strong>Feature (propriedade passiva), exemplos de +1:</strong></p>
                             <ul>
                                 <li>Defesa contra danos de fontes específicas (Dark, Martial, Primal, Mystic)</li>
-                                <li>4 de dano em todos que iniciam a rodada adjacente</li>
+                                <li>2 de dano em todos que iniciam a rodada adjacente</li>
                             </ul>
-                            <p> </p>
                             <p><strong>ATRIBUTOS MÉDIOS DOS MONSTROS:</strong></p>
-                            <p><strong>Villain Level 1 (BASE):  30 HP, Basic Attack 7, Def 6, 12 Damage, +2 CP Feature</strong></p>
+                            <p><strong>Villain Level 1 (BASE): 30 HP, Basic Attack 7, Def 6.</strong></p>
+                            <p><strong>Dano base do Primary Attack: 12 Damage.</strong></p>
                             <ul>
-                                <li><strong>Verde/Azul: BASE +1 CP</strong></li>
-                                <li><strong>Laranja/Vermelho:  BASE +2 CP</strong></li>
+                                <li><strong>Verde/Azul: 3 CP</strong></li>
+                                <li><strong>Laranja/Vermelho: 4 CP</strong></li>
                             </ul>
-                            <p><strong>Villain Level 2 (BASE):  40 HP, Basic Attack 9, Def 8, 15 Damage, +3 CP Feature, +1 Attack Rolls</strong></p>
+                            <p><strong>Villain Level 2 (BASE): 40 HP, Basic Attack 9, Def 8.</strong></p>
+                            <p><strong>Dano base do Primary Attack: 15 Damage.</strong></p>
                             <ul>
-                                <li><strong>Verde/Azul: BASE +1 CP</strong></li>
-                                <li><strong>Laranja/Vermelho:  BASE +2 CP</strong></li>
+                                <li><strong>Verde/Azul: 4 CP, +1 to Attack Rolls.</strong></li>
+                                <li><strong>Laranja/Vermelho: 5 CP, +1 to Attack Rolls.</strong></li>
                             </ul>
-                            <p> <strong>Villain Level 3 (BASE):  50 HP, Basic Attack 11, Def 10, 18 Damage, +4 CP Feature, +2 Attack Rolls</strong></p>
+                            <p><strong>Villain Level 3 (BASE): 50 HP, Basic Attack 11, Def 10.</strong></p>
+                            <p><strong>Dano base do Primary Attack: 18 Damage.</strong></p>
                             <ul>
-                                <li><strong>Verde/Azul: BASE +1 CP</strong></li>
-                                <li><strong>Laranja/Vermelho:  BASE +2 CP</strong></li>
+                                <li><strong>Verde/Azul: 5 CP, +2 to Attack Rolls</strong></li>
+                                <li><strong>Laranja/Vermelho: 6 CP, +2 to Attack Rolls</strong></li>
                             </ul>
-                            <p> </p>
-                            <p><strong>Miss Residual Damage médio por Level:</strong><br />Monstro Lvl 1 - 5 Residual Damage<br />Monstro Lvl 2 - 8 Residual Damage<br />Monstro Lvl 3 - 10 Residual Damage<br /><strong><br /></strong>Os atributos básicos não
-                                incluem os CPs extras de Feature, ou os CPs extras das cores das bases. Um Villian level 2 teria um Feature de ~3CP, +1 em Attack Rolls, e +1 ou  +2 CP extras dependendo da cor de sua base.</p>
-                            <p>É possível reduzir atributos ou ampliar atributos básicos utilizando a mesma tabela de CP para manter as proporções de balanceamento. Você pode fazer um inimigo level 2 com somente 35 de HP, ganhando 1 CP extra, para comprar
-                                +2 de dano para seu ataque primary, por exemplo.</p>
-                            <p>Cada desenvolvedor irá criar 4 monstros distintos, todos do mesmo nível, conforme a tabela ao final desta seção do documento. Os seus status serão parte de uma carta em tamanho padrão.Cada monstro terá estatísticas únicas e
-                                habilidades diversas. É importante que cada um deles tenha efeitos em seus ataques, e que cada um possua uma estratégia básica distinta.Podem ter monstros com ataque especial (inclusive com efeito permanente), mas após
-                                esse ataque o monstro só atacará com Basic Attack.Os monstros devem ser construídos de forma que funcionem tanto como um grupo, quanto separadamente em grupos sortidos de monstros diferentes.</p>
+                            <p><strong>Miss Residual Damage médio por Level:</strong><br />Monstro Lvl 1 - 5 Residual Damage<br />Monstro Lvl 2 - 8 Residual Damage<br />Monstro Lvl 3 - 10 Residual Damage<br /><strong><br /></strong>É possível reduzir atributos
+                                ou ampliar atributos básicos utilizando a mesma tabela de CP para manter as proporções de balanceamento. Você pode fazer um inimigo level 2 com somente 35 de HP, ganhando 1 CP extra, para comprar +1 de dano para seu ataque
+                                primary, por exemplo.</p>
+                            <p><strong>TABELA DE MONSTROS, TIPOS E NÍVEIS:</strong></p>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                <strong>Name</strong></p>
+                                        </td>
+                                        <td>
+                                            <p><strong>Category</strong></p>
+                                        </td>
+                                        <td>
+                                            <p><strong>Monster Level</strong></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Goblin</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Sentinel (mini antiga)</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Orc (mini antiga)</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Elf Archer</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Spider</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Skeleton</p>
+                                        </td>
+                                        <td>
+                                            <p>Undead</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Zombie</p>
+                                        </td>
+                                        <td>
+                                            <p>Undead</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Walker (mini antiga)</p>
+                                        </td>
+                                        <td>
+                                            <p>Undead</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Elf Warrior</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Cultist</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Dwarf</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Halfling Rider</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Sniper (mini antiga)</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Soldier (mini antiga)</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Construct</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Harpy</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Ghoul</p>
+                                        </td>
+                                        <td>
+                                            <p>Undead</p>
+                                        </td>
+                                        <td>
+                                            <p>2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Ogre</p>
+                                        </td>
+                                        <td>
+                                            <p>Humanoid</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Aberration</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Basilisk</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Elemental</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Golem (mini antiga)</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Gargolye</p>
+                                        </td>
+                                        <td>
+                                            <p>Magic Beast</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Specter</p>
+                                        </td>
+                                        <td>
+                                            <p>Undead</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Vampire (mini antiga)</p>
+                                        </td>
+                                        <td>
+                                            <p>Undead</p>
+                                        </td>
+                                        <td>
+                                            <p>3</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>

@@ -78,51 +78,31 @@ class Monstro {
 
     changeHP(valor) {
         this.cp -= valor;
-
-        if (valor > 0) {
-            this.hp += 5;
-        } else {
-            this.hp -= 5;
-        }
+        this.hp += valor * 5;
     }
 
     changeBA(valor) {
         this.cp -= valor;
-
-        if (valor > 0) {
-            this.ba += 1;
-        } else {
-            this.ba -= 1;
-        }
+        this.ba += valor;
     }
 
     changeDG(valor) {
         this.cp -= valor;
-
-        if (valor > 0) {
-            this.dg += 2 / 2;
-        } else {
-            this.dg -= 2 / 2;
-        }
+        this.dg += valor;
     }
 
     changeDF(valor) {
         this.cp -= valor;
-
-        if (valor > 0) {
-            this.def += 1;
-        } else {
-            this.def -= 1;
-        }
+        this.def += valor;
     }
 
     changeFCP(valor) {
-        this.cp -= valor / 2;
-        this.fcp += valor / 2;
+        this.cp -= valor;
+        this.fcp += valor;
     }
 
     changeACP(valor) {
-        this.cp -= valor / 2;
-        this.acp += valor / 2;
+        this.cp -= valor;
+        this.acp += valor;
     }
 }

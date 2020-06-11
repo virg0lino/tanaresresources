@@ -22,9 +22,9 @@
                         <h3>Conceitos Gerais</h3>
                         <ul>
                             <li>Esses elementos todos (ataques, itens, monstros e skill trees) são de uso exclusivos do modo PvE, portanto podem usar variáveis restritas e esse modo como: Evil Power, Boss Spell, Etc</li>
-                            <li>Sempre considerar os efeitos já existentes em outros ataques, itens e monstros para criar efeitos diferentes em cada um deles. </li>
-                            <li>Não é possível a adição de tiles no mapa a partir de efeitos de monstros, poderes ou itens pois todos os tiles daquele tipo podem estar em uso no cenário.
-                            </li>
+                            <li>Sempre considerar os efeitos já existentes em outros ataques, itens e monstros para criar efeitos diferentes em cada um deles.</li>
+                            <li>Não é recomendada a adição de tiles no mapa a partir de efeitos de monstros, poderes ou itens pois todos os tiles daquele tipo podem estar em uso no cenário.</li>
+                            <li>Regras novas criadas para a expansão do Tanares estão destacadas em verde.</li>
                         </ul>
                     </div>
                     <div>
@@ -64,25 +64,29 @@
                     <p>É um novo recurso disponível no modo PvE, que não existe nas quests do jogo base, apenas na expansão do Tanares. Eles serão representados por Tokens e a princípio os podem ser ganhos de de três maneiras:</p>
                     <ul>
                         <li>Ao matar um inimigo, todos os heróis ganham 1 PP (Nas missões podem ser criados inimigos que não dão PP, como minions e podem também ser desenvolvidos inimigos que dão 2 como o ogro, por exemplo, mas como regra geral é 1 PP por
-                            inimigo); (<em>é possível que mecânicas especiais dos monstros possam dar ou retirar PP’s)</em></li>
-                        <li>Ao errar completamente um ataque, além do dano Residual, o herói ganha 1 PP;</li>
+                            inimigo); (<em>é possível que mecânicas especiais dos monstros possam dar ou retirar PP’s)</em><em><br /><br /></em></li>
+                        <li>Ao errar completamente um ataque, além do dano Residual, o herói ganha 1 PP;<br /><br /></li>
                         <li>Ao realizar um Basic Ataque na sua ação principal, o herói ganha 1 PP.</li>
                     </ul>
                     <p>Os heróis podem ter um limite de 3 PP, podendo evoluir durante a campanha para um limite de até 5 PP de acordo com nível do herói.</p>
                     <p>Os PP podem ser usados de várias maneiras como:</p>
                     <ul>
-                        <li>Poderes da Skill Tree</li>
-                        <li>No modo simples, cada “role” terá uma habilidade distinta que permite gastar PPs.</li>
-                        <li>Potencializar Ataques (deve estar na descrição do ataque quando esta for uma possibilidade.) (<em>Ex: Um ataque que de 10 de dano, mas se o jogador gastar 1 PP ele de 2 de dano extra.</em>)</li>
-                        <li>Outros usos ainda não definidos como manobras de combate, ressurreição, etc… (ainda a serem desenvolvidos durante o processo de criação do material do Tanares)</li>
+                        <li>Poderes da Skill Tree. A maior parte dos efeitos das Skill Trees serão dependentes do uso de Power Points.<br /><br /></li>
+                        <li>No modo simples, cada “role” terá uma habilidade distinta que permite gastar PPs.<br /><br /></li>
+                        <li>Potencializar Ataques (deve estar na descrição do ataque quando esta for uma possibilidade.) (<em>Ex: Um ataque que de 10 de dano, mas se o jogador gastar 1 PP ele de 2 de dano extra.</em>)<br /><br /></li>
+                        <li>Outros usos ainda não definidos como manobras de combate, ressurreição, etc… (ainda a serem desenvolvidos durante o processo de criação do material do Tanares)<br /><br /></li>
                     </ul>
                     <p><strong>Efeitos que Removem Power Point: </strong>É possível criar efeitos de monstros, ou acontecimentos em missões que removam Power Points. Pode ser interessante que eles tenham algum outro efeito negativo caso o inimigo não tenha
                         Power Points para perder, mas não é obrigatório.</p>
-                    <p><strong>Balanceamento de Power Points:</strong> É importante esclarecer que 1 PP não tem um valor muito expressivo, ele é ganho sempre que um ataque erra e toda vez que o time dos heróis derrota um monstro. Ao não ser um recurso tão
-                        escasso é importante não sobrevaloriza-lo ao definir quais ganhos o jogador tem ao gastar PP's durante seus ataques. Estes bônus devem existir mas devem ser aplicados com cuidado para evitar que o ataque fique muito forte.</p>
-                    <p>De forma geral é pouco provável que em um ataque 1 PP possa ser convertido em mais do que 1 ou 2 de dano sem ficar desequilibrado. <br /><br />Uma escolha interessante de design pode ser também criar um efeito totalmente diferente
-                        no item/ataque, que acontece quando o jogador está com zero PPs. Se este efeito for particularmente distinto dos demais efeitos do ataque ele pode criar uma opção estratégia de procurar uma forma de zerar seus próprios power points
-                        para conseguir acessar o efeito, o que pode ser interessante.</p>
+                    <p><strong>Balanceamento de Power Points:</strong> É importante esclarecer que 1 PP não é um recurso tão escasso, sendo importante não sobrevaloriza-lo ao definir quais ganhos o jogador tem ao gastar PP's durante seus ataques. Estes bônus
+                        devem existir mas devem ser aplicados com cuidado para evitar que o ataque fique muito forte.</p>
+                    <p>Um PP tem o valor de 2,5 CP’s, mas nunca podem ser convertidos diretamente em dano nos ataques ou itens.Os Power Points devem sempre ser utilizados para ativar efeitos e poderes situacionais, nunca coisas que seriam sempre genericamente
+                        úteis.
+                    </p>
+                    <p>Isso se deve ao fato de que os PPs serão utilizados principalmente para ativar os efeitos das Skill Trees, e todos eles serão efeitos situacionais. Se um poder ou item tiver um uso genérico dos PP’s, eles acabaram sendo sendo usados
+                        neste poder, o que torna as skill trees irrelevantes.</p>
+                    <p>Uma coisa interessante que pode fazer parte de itens e ataques são efeitos que acontecem somente quando o jogador está com zero PPs. Se este efeito for particularmente distinto dos demais efeitos do ataque ele pode criar uma opção
+                        estratégica onde você tenta zerar seus próprios powerpoints para conseguir acessar o efeito, o que pode ser interessante.</p>
                 </div>
             </div>
         </div>
@@ -95,11 +99,29 @@
             <div id="handpower" class="collapse">
                 <div class="card-body">
                     <ul>
-                        <li>Enquanto o ataque estiver na sua mão, algum bônus passivo fica ativo no próprio herói (este bônus passivo pode envolver aliados, ex. enquanto esse ataque estiver ativo, todos os aliados adjacentes recebem 2 de dano a menos.)</li>
-                        <li>Na descrição, coloque este poder no local destinado a Benefit/Drawback. (em geral o ataque não deve ter outro Benefit/Drawback)</li>
+                        <li>Enquanto o ataque estiver na sua mão, algum bônus passivo fica ativo no próprio herói (este bônus passivo pode envolver aliados, ex. enquanto esse ataque estiver ativo, todos os aliados adjacentes recebem 2 de dano a menos.)<br
+                            /><br /></li>
+                        <li><strong>Na descrição, coloque este poder no local destinado a Benefit/Drawback. (Em geral o ataque não deve ter outro Benefit/Drawback)</strong><strong><br /><br /></strong></li>
                         <li>Esse poder só pode ser utilizado em ataques do nível 3. (Porém nem todo ataque de level 3 deve possuí-lo)</li>
                     </ul>
-                    <p>O valor em CP de um Hand Power deve ser baseado em quantos turnos ele causa seu efeito a cada ciclo de mãos de primary attack, multiplicado pelo CP de seu efeito, que deve incluir custo de oportunidade e demais considerações.</p>
+                    <p> </p>
+                    <p><strong>Como construir um Hand Power:</strong></p>
+                    <p>1o Passo: Defina o efeito do Hand Power.</p>
+                    <p>2o Passo: Descubra o valor em CP do efeito que você definiu para o Hand Power, como se fosse o CP para o efeito de um ataque com duração de 1 rodada.</p>
+                    <p>3o Passo: Multiplique este valor de CP por 5 para descobrir o CP que deverá ser considerado como utilizado no Hand Power. Este deverá ser o valor a ser descontado do CP do ataque para balanceá-lo.</p>
+                    <p>4o Passo: Adicione um efeito no ataque dizendo: "Causa um dano adicional de +X por carta de ataque primário na sua mão além desta." O X nesta frase deve ser substituído pelo valor de CP do efeito, descoberto no passo número 2. (<em>O CP deste efeito já está incluso na multiplicação por 5 feita no passo 3, considere que ele custa 0 CPs nos Hand Powers seguindo esta regra.</em>)</p>
+                    <p><strong>Exemplo</strong>:</p>
+                    <p>Vamos construir um Hand Power que diga "Seus ataques ganham: Efeito - Cure 2 pontos de dano em um aliado a até 8 quadrados de distância."</p>
+                    <p>1o Passo: Já fizemos, definimos que ele cura 2 em um aliado quando você acerta um ataque.</p>
+                    <p>2o Passo: Nós sabemos pela tabela que 2 pontos de cura valem 2 CP. Então temos o valor de 2.</p>
+                    <p>3o Passo: Multiplicamos o valor 2 por 5 e chegamos em 10 CP. Ou seja este Hand Power custa 10 CPs do ataque.</p>
+                    <p>4o Passo: Nosso efeito vai ficar assim: "Causa um dano adicional de +2 por carta na sua mão além desta." pois 2 CPs foi o valor que encontramos no passo número 2.</p>
+                    <p>Um poder de nível 3 tem 22 CPs pela documentação.<br />Então nosso poder ficaria:</p>
+                    <p>Poder de Exemplo (Mystic) - Level (3)<br />Range: (8) square / Target: 1 <br />Handpower (CP=10): Seus ataques ganham: Efeito - Cure 2 pontos de dano em um aliado a até 8 quadrados de distância. </p>
+                    <p>Hit: (9) damage + effect<br />Miss: (10) Residual Damage </p>
+                    <p>Effect (CP=3): <br />1- Causa um dano adicional de +2 por carta de ataque primário na sua mão além desta. <br />2- (Temp) Um aliado dentro do alcance fica Blessed. <br />Temporário: Termina no início de seu próximo turno.  </p>
+                    <p>Cálculo de CP:<br />10 CP do Hand Power (5 vezes o efeito de 2 de Cura que vale 2 CP)<br />  9 CP do Dano<br />  0 CP do Efeito numero 1, pois ele está incluso no custo do Hand Power.<br />  3 CP do Efeito numero 2, pois é o valor
+                        para o Bless por 1 rodada segundo a tabela.<br />Total: 22 CPs, ou seja a alocação de CPs para um poder de nível 3.</p>
                 </div>
             </div>
         </div>
@@ -112,9 +134,37 @@
             </div>
             <div id="fontepoder" class="collapse">
                 <div class="card-body">
-                    Cada ataque vai possuir um símbolo, que será referente a fonte de poder do mesmo. Essa nova variável poderá ser usada de várias maneiras no desenvolvimento, para criar sinergias (como por exemplo, se um monstro tiver um efeito Dark sobre ele, um determinado
-                    ataque pode dar mais dano em inimigos que estejam com um efeito Dark sobre eles, etc...), além de fraquezas dos monstros, efeitos em tiles, etc... Serão representadas por símbolos, no estilo “Magic”. São usados nos ataques, monstros,
-                    itens e outros elementos. As fontes serão: Dark, Martial, Primal, Mystic
+                    <p>Cada ataque vai possuir um símbolo, que será referente a fonte de poder do mesmo. Essa nova variável poderá ser usada de várias maneiras no desenvolvimento, para criar sinergias (como por exemplo, se um monstro tiver um efeito Dark
+                        sobre ele, um determinado ataque pode dar mais dano em inimigos que estejam com um efeito Dark sobre eles, etc...), além de  fraquezas dos monstros, efeitos em tiles, etc... </p>
+                    <p>Serão representadas por símbolos, no estilo “Magic”.</p>
+                    <p>São usados nos ataques, monstros, itens e outros elementos.</p>
+                    <p>As fontes serão: <strong>Dark, Martial, Primal, Mystic</strong></p>
+                    <ul>
+                        <li>Fontes de poder somente aparecem em ataques. Ataques de monstros devem ter uma fonte de poder.<br /><br /></li>
+                        <li>Os ataques originais dos personagens não tem fontes de poder. Incluindo de novos personagens a serem desenvolvidos.<br /><br /></li>
+                        <li>As diferentes fontes de poder não tem efeitos em si. Os ataques, itens e monstros podem possuir efeitos como “Receba -3 de dano de ataques do tipo Mystic”, ou “Este monstro recebe 3 de dano a mais de ataques do tipo Martial”, ou
+                            “Ataques do tipo Primal feitos com essa arma fazem com que você cure 2 pontos de vida”. <br /><br /></li>
+                        <li>A principal função das fontes de poder é permitir que os personagens façam combinações de ataques. Para isso é importante que sejam desenvolvidos ataques que tenham efeitos como: “Causa 5 de dano extra em inimigos afetados por
+                            um efeito Dark”, ou “Se o inimigo esta afetado por um efeito Primal, um aliado adjacente cura 4 pontos de vida”, ou efeitos similares.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#cpgeral">
+                    TABELAS GERAIS DE CP
+                </a>
+            </div>
+            <div id="cpgeral" class="collapse">
+                <div class="card-body">
+                    <p> <img class=" img-fluid rounded" width="450px" src="img/Tabela-nova.png" alt=""></p>
+                    <p>Esta tabela serve como referência para o valor de CPs dos diferentes efeitos. <em>(</em><em>Efeitos com condições especiais devem ser balanceados com base na raridade de sua ocorrência!)</em></p>
+                    <p>Os valores básicos para Acerto, Defesa, Dano e Cura são todos 1 CP, enquanto os diferentes efeitos de buffs e debuffs variam.</p>
+                    <p><br />Note que ao realizar o balanceamento dos poderes existem questões que podem alterar os valores relativos providos na tabela, que devem ser utilizadas como referência e não como valores absolutos para a o balanceamento. (<em>Ex: Um drawback que deixe você Corrupted é pior se você for um personagem melee do que se você for um personagem ranged. Um efeito que deixa o alvo Exalted por uma rodada como Benefit e como efeito pode curar aquele mesmo alvo é muito mais poderoso do que um efeito que só cause o Exalted e cause dano, já que isso vai fazer com que o bônus de cura possivelmente seja ativado mais vezes.</em>)</p>
+                    <p>Todos os ataques, monstros e itens podem ter quaisquer de suas partes convertidas em CPs e utilizadas da forma que for mais interessante para gerar o material. Nenhum efeito pode ser colocado em um monstro, item ou ataque sem que este
+                        efeito tenha um cálculo de valor em CP’s que deve ser considerado para o valor total da peça sendo desenvolvida.</p>
                 </div>
             </div>
         </div>
@@ -142,31 +192,51 @@
             </div>
             <div id="possibilidades" class="collapse">
                 <div class="card-body">
-                    <h5>Elementos para ajudar na Criação</h5>
+                    <h3><strong>Elementos para ajudar na Criação</strong></h3>
                     <ul>
-                        <li>Efeitos que usam ou bloqueiam uso de Power Point</li>
-                        <li>Fontes de poder para Ataques: Dark, Martial, Primal, Mystic</li>
-                        <li>Efeitos que tenham condições para funcionar (exemplo: se X HP ou menos, todos power points, e outros recursos disponíveis no jogo, incluindo posições específicas no tabuleiro). Importante: Muitos podem pedir que um efeito específico
-                            de fonte de poder esteja ativo, assim cria-se combinações sinérgicas.</li>
-                        <li>Esses ataques podem considerar PvE por completo, ou seja, afetar Evil Power / Boss Spells, monstros (e suas características).</li>
-                        <li>Efeitos que bloqueiam o uso do Team Token e Power Points. (para monstros)</li>
-                        <li>Interferir no rodízio de ataque. (cuidado para não deixar abusar)</li>
+                        <li>Efeitos que usam ou bloqueiam uso de Power Point<br /><br /></li>
+                        <li>Fontes de poder para Ataques: <strong>Dark, Martial, Primal, Mystic</strong><strong><br /><br /></strong></li>
+                        <li>Efeitos que tenham condições para funcionar (exemplo: se X HP ou menos, todos power points, e outros recursos disponíveis no jogo, incluindo posições específicas no tabuleiro). <strong>Importante:</strong><strong>Muitos podem pedir que um efeito específico de fonte de poder esteja ativo, assim cria-se combinações sinérgicas.</strong><strong><br /><br /></strong></li>
+                        <li>Esses ataques podem considerar PvE por completo, ou seja, afetar Evil Power / Boss Spells, monstros (e suas características).<br /><br /></li>
+                        <li>Efeitos que bloqueiam o uso do Team Token e Power Points. (para monstros)<br /><br /></li>
+                        <li>Interferir no rodízio de ataque. <strong>(cuidado para não deixar abusar)</strong><strong><br /><br /></strong></li>
                     </ul>
-                    <h5>Principais Restrições para Efeitos Propostos</h5>
+                    <h3> Principais Restrições para Efeitos Propostos</h3>
                     <ul>
-                        <li>EVITAR ao máximo efeitos que deixem um personagem (herói ou monstro) sem jogar (herói deslocado para longe sem alvo para atacar, paralisado, etc...)</li>
-                        <li>Não incluir mais do que dois efeitos no mesmo item/ataque, evitando ter “colcha de retalhos”.
-                        </li>
-                        <li>Preocupação da maneira de como será marcado o efeito (com isso, não será possível um ataque colocar dois efeitos temporários em personagens diferentes), já que se usa o attack card para marcar. Ou seja só é possível gerar efeitos
-                            afetando uma alvo por vez, pois a carta é o único marcador. </li>
-                        <li>Os alcances podem ser apenas 1, 2 ou 8 squares para os ataques. Os efeitos causados por um ataque podem ter alcances diversos (como 3, 4 e outros), um ataque com alcance 1 pode ter um efeito com alcance 5, por exemplo, mas os ataques
-                            em si devem sempre ser de alcance 1, 2 ou 8.. </li>
-                        <li>Sempre que um ataque/itens/monstro tirar Power Point, incluir a alternativa de outro efeito caso o alvo não tenha Power Point. O motivo é que existe um modo de evolução que é simplificado e não usa Power Point. </li>
-                        <li>Todo efeito temporário deve descrever ao fim como ele acaba. Olhe as cartas do jogo base como exemplo, os efeitos podem acabar em um turno, mas podem ter alguma outra condição qualquer. Vale notar que muitos efeitos do jogo base
-                            terminam ou ao serem usados uma vez ou quando se inicia um novo turno de quem o aplicou. Isso é o comum mas não é obrigatório. Em geral usa-se o termo "(Ends if used)" para denotar um efeito que acaba imediatamente assim que
-                            ele acontece uma única vez. Isso é importante para permitir um balanceamento fino. Um efeito que te dê protected por uma rodada inteira pode te ajudar contra vários ataques e é mais difícil de balancear que um efeito que de
-                            Protected até você ser atacado uma vez, o que é bem mais simples. Ambos são possíveis de serem criados, mas devem guardar as proporções corretas de efeitos e dano durante o balanceamento</li>
+                        <li>EVITAR ao máximo efeitos que deixem um personagem (herói ou monstro) sem jogar (herói deslocado para longe sem alvo para atacar, paralisado, etc...)<br /><br /></li>
+                        <li>Não incluir mais do que dois efeitos no mesmo item/ataque, evitando ter “colcha de retalhos”.<br /><br /></li>
+                        <li>Preocupação da maneira de como será marcado o efeito (com isso, não será possível um ataque colocar dois efeitos temporários em personagens diferentes), já que se usa o attack card para marcar.<strong>Ou seja só é possível gerar efeitos afetando uma alvo por vez, pois a carta é o único marcador. </strong><strong><br /><br /></strong></li>
+                        <li><strong>Os alcances podem ser apenas 1, 2 ou 8 squares para os ataques.</strong> Os efeitos causados por um ataque podem ter alcances diversos (como 3, 4 e outros), um ataque com alcance 1 pode ter um efeito com alcance 5, por
+                            exemplo, mas os ataques em si devem sempre ser de alcance 1, 2 ou 8.<br /><br /></li>
+                        <li>Não é mais necessário um ataque/itens/monstro que tire Power Point, inclua uma alternativa de outro efeito caso o alvo não tenha Power Point. Ainda sim, ter opções e diversidade para estes efeitos é interessante.<br /><br /></li>
                     </ul>
+                    <p>Todo efeito temporário deve descrever ao fim como ele acaba. Olhe as cartas do jogo base como exemplo, os efeitos podem acabar em um turno, mas podem ter alguma outra condição qualquer. Vale notar que muitos efeitos do jogo base terminam
+                        ou ao serem usados uma vez ou quando se inicia um novo turno de quem o aplicou. Isso é o comum mas não é obrigatório. Em geral usa-se o termo "<strong>(Ends if used)</strong>" para denotar um efeito que acaba imediatamente assim
+                        que ele acontece uma única vez. Isso é importante para permitir um balanceamento fino. Um efeito que te dê protected por uma rodada inteira pode te ajudar contra vários ataques e é mais difícil de balancear que um efeito que de
+                        Protected até você ser atacado uma vez, o que é bem mais simples. Ambos são possíveis de serem criados, mas devem guardar as proporções corretas de efeitos e dano durante o balanceamento</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#monstertype">
+                    Monster Type 
+                </a>
+            </div>
+            <div id="monstertype" class="collapse">
+                <div class="card-body">
+                    <p>Os monstros são divididos em 4 categorias:</p>
+                    <ul>
+                        <li><strong>Magical Beast</strong> (ex. Dragons, Spiders, Basilisk, Elemental, etc)</li>
+                        <li><strong>Undeads</strong> (ex. Skeletons, Zombies, Ghouls, Specters, etc)</li>
+                        <li><strong>Humanoids </strong>(ex. Sentinel, Sniper, Ogro, Cultist, Elf warrior, etc)</li>
+                        <li><strong>Boss</strong> (ex. Warlords, Dragons, Nyx, Gullog, etc)</li>
+                    </ul>
+                    <p>Os diferentes tipos de monstros não possuem um efeito em si, mas podem ser utilizados pelas cartas para gerar diferentes consequências. (Ex: Uma arma matadora de mortos-vivos poderia ter como sua propriedade causar +4 de dano em alvos
+                        do tipo Undeads.)</p>
+
+
                 </div>
             </div>
         </div>
@@ -174,27 +244,27 @@
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#marcadoresespeciais">
-                    Marcadores Especiais - Novos Tiles
+                    Marcadores Especiais - Tactical Token 
                 </a>
             </div>
             <div id="marcadoresespeciais" class="collapse">
                 <div class="card-body">
-                    <p>Foi decidido que teremos dois tokens marcadores, que terão o tamanho aproximado de 1 square, e que servirão para cada um dos times marcar efeitos de seus poderes e itens.
+                    <p>
+                        Foi decidido que teremos dois tokens marcadores, que terão o tamanho aproximado de 1 square, e que servirão para cada um dos times marcar efeitos de seus poderes e itens.
                     </p>
-                    <p>Cada time terá somente 1 Marcador, sendo inicialmente um azul e um vermelho. No PvP é um por time, no PvE um para os heróis e um para os vilões.
+                    <p>
+                        Cada time terá somente 1 Marcador, sendo inicialmente um azul e um vermelho. No PvP é um por time, no PvE um para os heróis e um para os vilões.
                     </p>
-                    <p>Somente um efeito pode estar utilizando o marcador por vez, e todo efeito que utilizar o marcador para marcar qualquer coisa, seja no tabuleiro ou seja em uma carta ou ficha deve incluir em seu texto como o mercador é removido e incluir
-                        que ele só pode ser utilizado caso o marcador esteja disponível.
+                    <p>
+                        Somente um efeito pode estar utilizando o marcador por vez, e todo efeito que utilizar o marcador para marcar qualquer coisa, seja no tabuleiro ou seja em uma carta ou ficha deve incluir em seu texto como o mercador é removido e incluir que ele só pode
+                        ser utilizado caso o marcador esteja disponível.
                     </p>
-                    <p>(Ex: Um ataque pode colocar este marcador em um espaço adjacente do tabuleiro e dizer que todos os monstros que entrarem em quadrados adjacentes ao marcador recebem 4 de dano. Este ataque deve declarar como e quando o marcador é removido,
-                        por exemplo "remova o marcador quando uma habilidade ou efeito de outro jogador requisitar o uso dele." ou "remova-o no início do seu próximo turno.".)
+                    <p>
+                        (Ex: Um ataque pode colocar este marcador em um espaço adjacente do tabuleiro e dizer que todos os monstros que entrarem em quadrados adjacentes ao marcador recebem 4 de dano. Este ataque deve declarar como e quando o marcador é removido, por exemplo
+                        "remova o marcador quando uma habilidade ou efeito de outro jogador requisitar o uso dele." ou "remova-o no início do seu próximo turno.".)
                     </p>
-                    <p>Importante frisar que a carta que moveu o marcador precisa fica removida de jogo e colocada de lado para indicar que ela é a carta com efeito de marcador ativa.
-                    </p>
-                    <p>Estes marcadores devem ser utilizados com muito cuidado, não queremos sobrecarregar o jogo com eles. Devem ser a exceção para permitir criarmos itens e poderes com efeitos muito únicos e interessantes, devendo ser reservados exclusivamente
-                        para situações que não podem de maneira alguma serem resolvidas de outra forma. Esta mecânica ainda será testada e pode ser revisada ou removida, por tanto utilizem-na para criar coisas interessantes, mas não exagere em seu uso,
-                        já que qualquer material baseado nela pode acabar tendo de sofrer alterações em fases mais avançadas do projeto, mesmo que tiverem sido aprovadas no momento.
-                    </p>
+
+
                 </div>
             </div>
         </div>

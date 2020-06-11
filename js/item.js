@@ -1,7 +1,7 @@
 class Item {
     constructor(myobj) {
-        this.id=myobj.id,
-        this._level = myobj.level;
+        this.id = myobj.id,
+            this._level = myobj.level;
         this.proficiency = myobj.proficiency;
         this.bonus = myobj.bonus;
         this.nome = myobj.nome;
@@ -31,47 +31,28 @@ class Item {
     }
 
     changeDG(valor) {
-        this.capacidadepoder -= valor/2;
-
-        if (valor > 0) {
-            this.dano += 2/2;
-        } else {
-            this.dano -= 2/2;
-        }
+        this.capacidadepoder -= valor;
+        this.dano += valor;
     }
 
     changeATT(valor) {
         this.capacidadepoder -= valor;
-
-        if (valor > 0) {
-            this.ataque += 1;
-        } else {
-            this.ataque -= 1;
-        }
+        this.ataque += valor;
     }
 
     changeDEF(valor) {
         this.capacidadepoder -= valor;
-
-        if (valor > 0) {
-            this.defesa += 1;
-        } else {
-            this.defesa -= 1;
-        }
+        this.defesa += valor;
     }
 
     changeHP(valor) {
-        this.capacidadepoder -= valor/2;
-
-        if (valor > 0) {
-            this.hp += 10/2;
-        } else {
-            this.hp -= 10/2;
-        }
+        this.capacidadepoder -= valor;
+        this.hp += valor * 5;
     }
+
     changePCP(valor) {
-        this.capacidadepoder -= valor/2;
-        this.Propertycp += valor/2;
+        this.capacidadepoder -= valor;
+        this.Propertycp += valor;
     }
 
     changeCP(valor) {

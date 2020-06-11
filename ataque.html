@@ -174,9 +174,9 @@
                                         <label>Handpower CP:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="ataque.changeHCP(-1)">-1</button>
+                                                            v-on:click="ataque.changeHCP(-0.5)"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="ataque.changeHCP(1)">+1</button>
+                                                            v-on:click="ataque.changeHCP(0.5)"><i class="fas fa-caret-up"></i></button>
                                                     </div>
                                                 </label>
                                         <input type="number" readonly class="form-control" v-model="ataque.handpowercp">
@@ -191,9 +191,9 @@
                                         <label>Beneft CP:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="ataque.changeBCP(-1)">-1</button>
+                                                            v-on:click="ataque.changeBCP(-0.5)"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="ataque.changeBCP(1)">+1</button>
+                                                            v-on:click="ataque.changeBCP(0.5)"><i class="fas fa-caret-up"></i></button>
                                                     </div>
                                                 </label>
                                         <input type="number" readonly class="form-control" v-model="ataque.beneficiocp">
@@ -208,9 +208,9 @@
                                         <label for="txtacp">Drawback CP:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="ataque.changePCP(-1)">-1</button>
+                                                            v-on:click="ataque.changePCP(-0.5)"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="ataque.changePCP(1)">+1</button>
+                                                            v-on:click="ataque.changePCP(0.5)"><i class="fas fa-caret-up"></i></button>
                                                     </div>
                                                 </label>
                                         <input type="number" readonly class="form-control" v-model="ataque.penalidadecp">
@@ -221,9 +221,9 @@
                                         <label>Hit:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="ataque.changeDG(-1)">-1</button>
+                                                            v-on:click="ataque.changeDG(-1)"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="ataque.changeDG(1)">+1</button>
+                                                            v-on:click="ataque.changeDG(1)"><i class="fas fa-caret-up"></i></button>
                                                     </div>
                                                 </label>
                                         <input class="form-control" readonly v-model="ataque.danoacerto"></textarea>
@@ -232,10 +232,10 @@
                                         <label>Miss:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="ataque.changeCP(-0.5)">-1</button>
+                                                            v-on:click="ataque.changeCP(-0.5)"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="ataque.changeCP(0.5)">+1</button>
-                                                    </div>Livre
+                                                            v-on:click="ataque.changeCP(0.5)"><i class="fas fa-caret-up"></i></button>
+                                                    </div> Livre
                                                 </label>
                                         <input class="form-control" v-model="ataque.danoerro"></textarea>
                                     </div>
@@ -249,9 +249,9 @@
                                         <label>Effect CP:
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" class="btn btn-warning"
-                                                            v-on:click="ataque.changeECP(-1)">-1</button>
+                                                            v-on:click="ataque.changeECP(-0.5)"><i class="fas fa-caret-down"></i></button>
                                                         <button type="button" class="btn btn-primary"
-                                                            v-on:click="ataque.changeECP(1)">+1</button>
+                                                            v-on:click="ataque.changeECP(0.5)"><i class="fas fa-caret-up"></i></button>
                                                     </div>
                                                 </label>
                                         <input type="number" readonly class="form-control" v-model="ataque.efeitocp">
@@ -287,26 +287,31 @@
                                         de ataques dos personagens durante a campanha. Ou seja, em determinado momento da campanha o jogador irá receber como recompensa um “ataque de nível 1”, podendo então pegar todas as cartas de ataque de nível 1 de
                                         seu role, e escolher um para adicionar a sua mão de habilidades.</li>
                                     <li>Os ataques criados devem ser complementares a função do role que fazem parte.</li>
-                                    <li>Os ataques criados não podem ser special attacks. Porém é possível fazer um ataque de interaja de alguma forma com o token de especial, mas isso é uma exceção. </li>
+                                    <li>Os ataques criados não podem ser special attacks. Porém é possível fazer um ataque de interaja de alguma forma com o token de especial, mas isso é uma exceção.</li>
                                     <li>Os novos ataque de heróis não podem ter efeito permanente nem ser de interrupção.</li>
                                     <li>Sempre considerar a concordância do ataque proposto com o Combat Role (Melees: Brute, Bruiser, Tactician, Tank - Rangeds: Healer, Shooter, Controler, Comander):</li>
                                     <li>É importante que diversos ataques tenham efeitos condicionais que envolvam o inimigo estar afetado por uma fonte de poder diferente daquela que o próprio personagem pode aplicar sozinho, permitindo assim combos de ataques.</li>
                                     <li>São interessantes habilidades que permitam descartar cartas de ataque ou recuperar cartas de ataque descartadas, mas elas precisam ser aplicadas com cuidado pois são difíceis de balancear. É possível fazê-lo com base
                                         na efetividade média de uma rotação da mão.</li>
+                                    <li>Ataques com Hand Power devem ser balanceados segundo a sessão “Como construir um Hand Power” anteriormente apresentada neste documento.</li>
                                     <li>Também são interessantes ataques com efeitos condicionados a outros efeitos, como um efeito que acontece somente se o alvo estiver exposed por exemplo. Isso permite novas combinações entre ataques de diferentes personagens.</li>
                                     <li>Em média um ataque tem a seguinte capacidade de poder:</li>
                                     <ul>
-                                        <li><strong>Nível 1</strong>: 14 pontos de dano (equivalente a um primary attack de personagem) (Miss: 5 Residual em média)</li>
-                                        <li><strong>Nível 2</strong>: 18 pontos de dano (entre um ataque primary e um especial.) (Miss: 8 Residual em média)</li>
-                                        <li><strong>Nível 3</strong>: 22 pontos de dano (equivalente a um especial de personagem) (Miss: 10 Residual em média)</li>
-                                        <li>Os ataques criados devem ser equilibrados quando comparados com um ataque que não possui nenhum efeito, atinge um único alvo e tem este dano marcado. Ou seja, a não ser que seu ataque tenha drawbacks fortes, ele
-                                            nunca pode passar destes valores de dano, e geralmente devem ficar bem abaixo deles a depender de quão poderosos são os efeitos que seu ataque provém, ou qual o número de alvos que ele afeta.</li>
+                                        <li>Nível 1: 14 CP (equivalente a um primary attack de personagem) (Miss: 5 Residual em média)</li>
+                                        <li>Nível 2: 18 CP (entre um ataque primary e um especial.) (Miss: 8 Residual em média)</li>
+                                        <li>Nível 3: 22 CP (equivalente a um especial de personagem) (Miss: 10 Residual em média)</li>
+                                        <li>Os ataques criados devem ser equilibrados quando comparados com um ataque que não possui nenhum efeito, atinge um único alvo e tem esta quantidade de CPs. Ou seja, a não ser que seu ataque tenha drawbacks fortes,
+                                            ele nunca pode passar destes valores de dano, e geralmente devem ficar bem abaixo deles a depender de quão poderosos são os efeitos que seu ataque provém, ou qual o número de alvos que ele afeta.</li>
                                     </ul>
                                     <li>Sabendo que:</li>
                                     <ul>
-                                        <li>dano direto é melhor que cura</li>
-                                        <li>dano em um único alvo concentrado é melhor do dado espalhado</li>
-                                        <li>rolagem única é melhor que necessidade de múltiplas rolagens</li>
+                                        <li>dano direto é melhor que cura.</li>
+                                        <li>dano em um único alvo concentrado é melhor do que espalhado. (Como regra geral, reduza pela metade o custo de CP de dano causado à alvos além do primeiro. Ex: 10 de dano em um target custa 10 CP, 7 de dano em 2
+                                            targets custaria 7+3,5 CP=10,5 CP. Já 5 de dano em 3 targets custaria 5+2,5+2,5 CP = 10 CP.)</li>
+                                        <li>rolagem única é melhor que necessidade de múltiplas rolagens.</li>
+                                        <li>Para equilibrar ataques com múltiplos alvos reduza pela metade o CP gasto com dano em alvos além do primeiro. (Ex: Um ataque que causa 10 de dano em 3 alvos custaria 10+5+5 CP)</li>
+                                        <li>Para ataques em área estime o número médio de alvos afetados e aplique a regra acima. Lembrando que dificilmente existirão mais de 4 inimigos presentes no combate, e que geralmente eles não vão estar posicionados
+                                            próximos um ao outro. (Ex: Uma área de 3x3 em range 8 poderia ser estimada como afetando 2,25 inimigos. Uma área de 2x2 1,5. Inimigos adjacentes a você como 2, e etc…)</li>
                                     </ul>
                                 </ul>
                             </div>
@@ -364,7 +369,7 @@
                     let ataque = new Ataque();
                     ataque.level = attacklevels[index];
                     ataque.alcance = alcances[index];
-
+                    ataque.setMissForLevl();
                     this.heroAtaque.ataques.push(ataque);
                 }
                 if (sessionStorage.ataques != "null" && sessionStorage.ataques != "undefined") {

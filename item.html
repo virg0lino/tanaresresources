@@ -128,7 +128,7 @@
                     <div class="card mt-2 mb-2" v-for="item in ItensSet.Itens">
                         <div class="card-header">{{item.tipo}}
                             <button class="float-right btn btn-danger btn-sm" v-on:click="if(confirm('deseja realmente excluir este item?')){dropItem(item.id)}">
-                        Remove</button>
+                                <i class="far fa-trash-alt"></i></button>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -189,9 +189,9 @@
                                     <label>Damage:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
-                                        v-on:click="item.changeDG(-1)">-1</button>
+                                        v-on:click="item.changeDG(-1)"><i class="fas fa-caret-down"></i></button>
                                     <button type="button" class="btn btn-primary"
-                                        v-on:click="item.changeDG(1)">+1</button>
+                                        v-on:click="item.changeDG(1)"><i class="fas fa-caret-up"></i></button>
                                 </div>
                             </label>
                                     <input type="number" readonly class="form-control" v-model="item.dano">
@@ -200,9 +200,9 @@
                                     <label>Attack:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
-                                        v-on:click="item.changeATT(-1)">-1</button>
+                                        v-on:click="item.changeATT(-1)"><i class="fas fa-caret-down"></i></button>
                                     <button type="button" class="btn btn-primary"
-                                        v-on:click="item.changeATT(1)">+1</button>
+                                        v-on:click="item.changeATT(1)"><i class="fas fa-caret-up"></i></button>
                                 </div>
                             </label>
                                     <input type="number" readonly class="form-control" v-model="item.ataque">
@@ -213,9 +213,9 @@
                                     <label>HP:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
-                                        v-on:click="item.changeHP(-1)">-1</button>
+                                        v-on:click="item.changeHP(-1)"><i class="fas fa-caret-down"></i></button>
                                     <button type="button" class="btn btn-primary"
-                                        v-on:click="item.changeHP(1)">+1</button>
+                                        v-on:click="item.changeHP(1)"><i class="fas fa-caret-up"></i></button>
                                 </div>
                             </label>
                                     <input type="number" readonly class="form-control" v-model="item.hp">
@@ -224,9 +224,9 @@
                                     <label>Defense:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
-                                        v-on:click="item.changeDEF(-1)">-1</button>
+                                        v-on:click="item.changeDEF(-1)"><i class="fas fa-caret-down"></i></button>
                                     <button type="button" class="btn btn-primary"
-                                        v-on:click="item.changeDEF(1)">+1</button>
+                                        v-on:click="item.changeDEF(1)"><i class="fas fa-caret-up"></i></button>
                                 </div>
                             </label>
                                     <input type="number" readonly class="form-control" v-model="item.defesa">
@@ -241,9 +241,9 @@
                                     <label>Property CP:
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-warning"
-                                        v-on:click="item.changePCP(-1)">-1</button>
+                                        v-on:click="item.changePCP(-0.5)"><i class="fas fa-caret-down"></i></button>
                                     <button type="button" class="btn btn-primary"
-                                        v-on:click="item.changePCP(1)">+1</button>
+                                        v-on:click="item.changePCP(0.5)"><i class="fas fa-caret-up"></i></button>
                                 </div>
                             </label>
                                     <input type="number" readonly class="form-control" v-model="item.Propertycp">
@@ -272,11 +272,12 @@
                                     <li>Cada herói pode equipar uma arma e uma armadura.</li>
                                     <li>Os itens só podem ser equipados no começo de cada quest.</li>
                                     <li>Não poderá trocar itens no decorrer de uma quest.</li>
-                                    <li>Os equipamentos possuem uma proficiência:</li>
-                                    <ul>
-                                        <li>Proficiência na Arma (dois combat roles por item): heróis recebem todos os bônus e efeitos descritos do item em todos os seus ataques</li>
-                                        <li>Não proficiência na Arma (demais combat roles): heróis recebem todos os bônus e efeitos descritos do item <strong>apenas nos ataques básicos</strong>.</li>
-                                    </ul>
+                                    <li>Os equipamentos possuem uma proficiência:
+                                        <ul>
+                                            <li>Proficiência na Arma (dois combat roles por item): heróis recebem todos os bônus e efeitos descritos do item em todos os seus ataques</li>
+                                            <li>Não proficiência na Arma (demais combat roles): heróis recebem todos os bônus e efeitos descritos do item <strong>apenas nos ataques básicos</strong>.</li>
+                                        </ul>
+                                    </li>
                                     <li>Armaduras só podem ser equipadas por 3 combat roles específicos a serem definidos em cada item.</li>
                                     <li>Personagens Melee só tem proficiência com armas Melee, e o mesmo vale para personagens Ranged. De forma geral a arma que o personagem utiliza não altera seu ataque básico ou a distância de seus ataques. Uma arma específica
                                         pode fazer isso em seu efeito.</li>
@@ -305,16 +306,10 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <p>Itens</p>
+                                                <p><strong>Itens</strong></p>
                                             </td>
                                             <td>
-                                                <p>Limite Total: <br />Level Up + Itens</p>
-                                            </td>
-                                            <td>
-                                                <p>Limite:<br />Level UP</p>
-                                            </td>
-                                            <td>
-                                                <p>Limite:<br />Item</p>
+                                                <p><strong>Limite</strong></p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -322,13 +317,7 @@
                                                 <p>Arma</p>
                                             </td>
                                             <td>
-                                                <p>Attack Roll: +5</p>
-                                            </td>
-                                            <td>
-                                                <p>+2</p>
-                                            </td>
-                                            <td>
-                                                <p>+3 </p>
+                                                <p>+3 Acerto</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -336,13 +325,7 @@
                                                 <p>Arma</p>
                                             </td>
                                             <td>
-                                                <p>Damage: +8</p>
-                                            </td>
-                                            <td>
-                                                <p>+4</p>
-                                            </td>
-                                            <td>
-                                                <p>+4</p>
+                                                <p>+4 Dano</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -350,13 +333,7 @@
                                                 <p>Armadura</p>
                                             </td>
                                             <td>
-                                                <p>HP: +40</p>
-                                            </td>
-                                            <td>
-                                                <p>+20 </p>
-                                            </td>
-                                            <td>
-                                                <p>+20</p>
+                                                <p>+20 HP</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -364,34 +341,23 @@
                                                 <p>Armadura</p>
                                             </td>
                                             <td>
-                                                <p>Defense: +5 </p>
-                                            </td>
-                                            <td>
-                                                <p>+2</p>
-                                            </td>
-                                            <td>
-                                                <p>+3</p>
+                                                <p>+3 Defesa</p>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p>Deve-se manter atenção a estes números para que o total de ganhos do Level Up dos personagens somado a seus itens não cheguem a valores superiores a estes. Ou seja, o maior valor que uma arma pode dar para o ataque é +3,
-                                    e para o dano +4. Uma armadura não deve dar mais do que 20 de HP, ou 3 de Defense.</p>
                                 <p> </p>
-                                <p><strong>VALORES DE BALANCEAMENTO:</strong></p>
-                                <p><br />Para realizarem o balanceamento do jogo considerem que as seguintes opções se equivalem, sendo chamadas neste documento como 1 CP, ou 1 de Capacidade de Poder.</p>
+                                <p><strong>VALORES DE BALANCEAMENTO:</strong><br />Para realizarem o balanceamento do jogo considerem que as seguintes opções se equivalem, sendo chamadas neste documento como 1 CP, ou 1 de Capacidade de Poder.</p>
                                 <p>É possível retirar ou ampliar coisas de qualquer item ou ataque e adicionar em outros locais utilizando as proporções da tabela a seguir.</p>
-                                <p>É importante notar que estes valores são atribuídos como medida de comparação, ou seja, seu item, ataque ou monstro não deve ter efeitos além daqueles que foram pagos com os CP’s. Todos os efeitos devem ser levados em consideração.
-                                    Os valores não se tratam de um número base para efeitos genéricos onde mais efeitos específicos ainda podem ser aplicados em cima. O seu item, ataque ou monstro deve ser equilibrado com uma versão simples e sem efeitos
-                                    utilizando os números contidos nas tabelas. </p>
+                                <p>É importante notar que estes valores são atribuídos como medida de comparação, ou seja, seu item, ataque ou monstro não deve ter efeitos além daqueles que foram pagos com os CP’s. Todos os efeitos devem ser levados em consideração. </p>
                                 <p><strong>Como parâmetro, 1 ponto de Capacidade de Poder é igual a:</strong></p>
                                 <ul>
-                                    <li><em>+2 damage</em></li>
+                                    <li><em>+1 damage (2 de dano com uma condição especial)</em></li>
+                                    <li><em>1 de Cura</em></li>
                                     <li><em>+1 to hit</em></li>
-                                    <li><em>+10 HP</em></li>
-                                    <li><em>+1 Defense</em><em><br /></em><em>(Esta proporção vale para Itens, Ataques e coisas referentes aos jogadores. No caso dos vilões, o HP é somente +5)</em></li>
+                                    <li><em>+5 HP</em></li>
+                                    <li><em>+1 Defense</em></li>
                                 </ul>
-                                <p> </p>
                             </div>
                         </div>
                     </div>
