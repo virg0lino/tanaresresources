@@ -28,6 +28,7 @@ class Item {
         this.hp = 0;
         this.defesa = 0;
         this.capacidadepoder = level.cp;
+        this.Propertycp = 0;
     }
 
     changeDG(valor) {
