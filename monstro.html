@@ -47,10 +47,15 @@
             <div class="card m-4 border-0">
                 <div class="card-header" v-bind:style="{background: m.cor.color}"> </div>
                 <div class="card-body">
-                    {{m.nome}}, Level: {{m.level.id}} ({{m.cor.cor}})<br> Category: {{m.categoria}}<br> Stats:
-                    <br> {{m.hp}} HP<br> {{m.ba}} Basic Attack<br> {{m.def}} Def<br> {{m.mv}} Movement <br> {{m.dg}} Damage ({{m.fp}})<br> Features: {{m.feature}}<br> {{m.hasSpecial?'Special Attack':'Primary Attack'}}:<br>
+                    {{m.nome}}, Level: {{m.level.id}} ({{m.cor.cor}})<br> Category: {{m.categoria}}<br>
+                    <span>Stats:</span>
+                    <div class="ml-2">
+                        {{m.hp}} HP<br> {{m.ba}} Basic Attack<br> {{m.def}} Def<br> {{m.mv}} Movement <br> Features: {{m.feature}}<br>
+                    </div>
+                    {{m.hasSpecial?'Special Attack':'Primary Attack'}}:<br>
                     <span v-for="ataque in m.attack">
-                        (CP={{ataque.capacidadepoder}}) {{ataque.nome}} ({{ataque.fontedepoder.toString()}})<br>
+                        <div class="ml-2">
+                        {{ataque.nome}} ({{ataque.fontedepoder.toString()}})<br>
                         Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
                         <div v-if="ataque.beneficio!=''">Beneft <span v-if="ataque.beneficiocp!=0">(CP={{ataque.beneficiocp}})</span>: {{ataque.beneficio}}
                     <br>
@@ -58,13 +63,17 @@
                 <div v-if="ataque.penalidade!=''">Drawback <span v-if="ataque.penalidadecp!=0">(CP={{ataque.penalidadecp}})</span>: {{ataque.penalidade}}<br>
                 </div>
                 Hit: ({{ataque.danoacerto}}) damage + effect<br>
-                <div v-if="ataque.danoerro!=''">Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
-                <div v-if="ataque.efeito!=''">Effect <span v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: {{ataque.efeito}}
-                    <br></div><br>
+                <div v-if="ataque.danoerro!=''">
+                    Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
+                <div v-if="ataque.efeito!=''">
+                    Effect <span v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: {{ataque.efeito}}
+                    <br>
+                </div>
                 </span>
-                Command Basic Strategy: {{m.strategy}}<br>
             </div>
+            Command Basic Strategy: {{m.strategy}}<br>
         </div>
+    </div>
     </div>
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
