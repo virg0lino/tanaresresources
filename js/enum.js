@@ -12,7 +12,7 @@ var monsterCategory = ["Magic Beast", "Undead", "Humanoid", "Boss"];
 var monsterlevels = [
     { id: 1, hp: 30, ba: 7, def: 6, dg: 12, cp: 2, attackroll: 0 },
     { id: 2, hp: 40, ba: 9, def: 8, dg: 15, cp: 3, attackroll: 1 },
-    { id: 3, hp: 50, ba: 11, def: 6, dg: 18, cp: 4, attackroll: 2 },
+    { id: 3, hp: 50, ba: 11, def: 10, dg: 18, cp: 4, attackroll: 2 },
 ];
 var monstercolors = [
     { id: 0, cor: 'verde', color: 'green', cp: 1 },
@@ -26,4 +26,4 @@ var attacklevels = [
     { id: 1, danoacerto: 14 },
     { id: 2, danoacerto: 15 },
     { id: 3, danoacerto: 22 },
-]; 
+];
