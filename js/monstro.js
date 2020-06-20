@@ -51,6 +51,7 @@ class Monstro {
                 this.attack[0].danoerro = 0;
                 break;
         }
+        this.attack[0].danoacerto = this.dg;
         this.attack[0].efeitocp = 0;
         this.attack[0].capacidadepoder = 0;
     }
