@@ -50,7 +50,7 @@
                     {{m.nome}}, Level: {{m.level.id}} ({{m.cor.cor}})<br> Category: {{m.categoria}}<br>
                     <span>Stats:</span>
                     <div class="ml-2">
-                        {{m.hp}} HP<br> {{m.ba}} Basic Attack<br> {{m.def}} Def<br> {{m.mv}} Movement <br> Features: {{m.feature}}<br>
+                        {{m.hp}} HP<br> {{m.ba}} Basic Attack<br> {{m.def}} Def<br> {{m.mv}} Movement <br> Features (CP={{m.fcp}}): {{m.feature}}<br>
                     </div>
                     {{m.hasSpecial?'Special Attack':'Primary Attack'}}:<br>
                     <span v-for="ataque in m.attack">
