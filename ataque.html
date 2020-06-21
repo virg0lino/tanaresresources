@@ -28,6 +28,9 @@
             .impressao {
                 display: block;
             }
+            .newpage {
+                page-break-after: always;
+            }
         }
         
         @media screen {
@@ -45,7 +48,7 @@
 
         <div class="impressao">
             Pack de ataques para {{heroAtaque.role}}<br>
-            <div class="card m-4 border-0" v-for="ataque in heroAtaque.ataques">
+            <div class="card m-4 border-0 newpage" v-for="ataque in heroAtaque.ataques">
                 <div class="card-body">
                     {{ataque.nome}}<br> ({{ataque.fontedepoder.toString()}}) - Level ({{ataque.level.id}})<br> Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
                     <div v-if="ataque.handpower!=''">Handpower <span v-if="ataque.handpowercp!=0">(CP={{ataque.handpowercp}})</span>: {{ataque.handpower}}<br>
@@ -57,6 +60,7 @@
                     Hit: ({{ataque.danoacerto}}) damage + effect<br>
                     <div v-if="ataque.danoerro!=''">Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
                     <div v-if="ataque.efeito!=''">Effect <span v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: {{ataque.efeito}}<br></div>
+                    <div>Temporary (Temp): Termina no inicio do seu próximo turno.</div>
                 </div>
             </div>
         </div>
@@ -321,7 +325,7 @@
             </div>
         </section>
 
-        <footer class="footer text-faded text-center py-5">
+        <footer class="footer text-faded text-center py-5 impressaoNao">
             <div class="container">
                 <p class="m-0 small"> Casa do Goblin 2020</p>
             </div>

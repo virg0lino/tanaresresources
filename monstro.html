@@ -28,6 +28,9 @@
             .impressao {
                 display: block;
             }
+            .newpage {
+                page-break-after: always;
+            }
         }
         
         @media screen {
@@ -42,9 +45,8 @@
 <body>
 
     <div id="app" class="">
-
-        <div class="impressao" v-for="m in monsters">
-            <div class="card m-4 border-0">
+        <div class="impressao newpage" v-for="m in monsters">
+            <div class="card m-4 border-0 ">
                 <div class="card-header" v-bind:style="{background: m.cor.color}"> </div>
                 <div class="card-body">
                     {{m.nome}}, Level: {{m.level.id}} ({{m.cor.cor}})<br> Category: {{m.categoria}}<br>
@@ -71,6 +73,7 @@
                 </div>
                 </span>
             </div>
+            <div>Temporary (Temp): Termina no inicio do seu próximo turno.</div>
             Command Basic Strategy: {{m.strategy}}<br>
         </div>
     </div>
@@ -756,7 +759,7 @@
         </div>
     </section>
 
-    <footer class="footer text-faded text-center py-5">
+    <footer class="footer text-faded text-center py-5 impressaoNao">
         <div class="container">
             <p class="m-0 small"> Casa do Goblin 2020</p>
         </div>

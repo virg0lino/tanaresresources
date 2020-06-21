@@ -28,6 +28,9 @@
             .impressao {
                 display: block;
             }
+            .newpage {
+                page-break-after: always;
+            }
         }
         
         @media screen {
@@ -43,8 +46,8 @@
 
     <div id="app" class="">
 
-        <div class="impressao">
-            <div class="card m-4 border-0" v-for="item in ItensSet.Itens">
+        <div class="impressao ">
+            <div class="card m-4 border-0 newpage" v-for="item in ItensSet.Itens">
                 <div class="card-body">
                     {{item.categoria}} {{item.tipo}} Level {{item.level.id}}<br> {{item.nome}}
                     <br> Proficiency: {{item.proficiency.toString()}}<br> Bonus:
@@ -59,7 +62,9 @@
                     <span v-if="item.defesa>0">+{{item.defesa}} Defense</span>
                     </span>
                     <br> Property <span v-if="item.Propertycp!=0">(CP={{item.Propertycp}})</span>: {{item.Property}}<br>
+                    <div>Temporary (Temp): Termina no inicio do seu próximo turno.</div>
                 </div>
+
             </div>
         </div>
 
@@ -365,7 +370,7 @@
             </div>
         </section>
 
-        <footer class="footer text-faded text-center py-5">
+        <footer class="footer text-faded text-center py-5 impressaoNao">
             <div class="container">
                 <p class="m-0 small"> Casa do Goblin 2020</p>
             </div>
