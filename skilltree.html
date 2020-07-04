@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>tanares resource maker - Skill Tree</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/business-casual.min.css" rel="stylesheet">
+
+
+
+    <style>
+        @media print {
+            .impressaoNao {
+                display: none;
+            }
+
+            .impressao {
+                display: block;
+            }
+
+            .newpage {
+                page-break-after: always;
+            }
+        }
+
+        @media screen {
+            .impressao {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div id="app" class="">
+
+        <div class="impressao">
+            Skill tree para {{skilltree.role}}<br>
+            <div class="card m-4 border-0 newpage" v-for="skill in skilltree.skill">
+                <div class="card-body">
+                    <strong>{{skill.nome}}</strong> - {{skilltree.role}} - Level {{skill.level.id}}<br>
+                    <strong>Target</strong>: {{skill.alvo}} <br>
+                    <strong>Range</strong>:{{skill.alcance}} square <br>
+                    <div v-if="skill.uso!=''"><strong>Usage</strong>  <span v-if="skill.usocp!=0">(CP={{skill.efeitocp}})</span>:
+                        {{skill.uso}}<br></div>
+                    <div v-if="skill.efeito!=''"><strong>Effect</strong> <span v-if="skill.efeitocp!=0">(CP={{skill.efeitocp}})</span>:
+                        {{skill.efeito}}<br></div>
+                    <div v-if="skill.temp">Temporary (Temp): Termina no inicio do seu próximo turno.</div>
+                </div>
+            </div>
+        </div>
+
+
+        <h1 class="site-heading text-center text-white d-none d-lg-block">
+            <span class="site-heading-upper text-primary mb-3">CHANGE YOUR PATH</span>
+            <span class="site-heading-lower">Skill Tree</span>
+        </h1>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4 sticky-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">
+                    Skill Tree</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse  navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!"
+                                onclick="sessionStorage.skilltree=null;location.reload();">
+                                <i class="fas fa-file"></i> Novo
+                            </a>
+                        </li>
+                        <li class="nav-item px-lg-4">
+                            <input id="fileInput" type="file" accept=".txt" style="display:none;"
+                                v-on:change="getFile" />
+                            <a class="nav-link text-uppercase text-expanded" href="#!"
+                                onclick="document.getElementById('fileInput').click();">
+                                <i class="far fa-folder-open"></i> Abrir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!"
+                                v-on:click="download(skilltree,'skilltree')">
+                                <i class="fas fa-download"></i> Salvar
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="print()">
+                                <i class="fas fa-print"></i> Imprimir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" data-toggle="modal"
+                                data-target="#ModalLibrary">
+                                <i class="fas fa-book"></i> Livraria
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="page-section cta impressaoNao">
+            <div class="container ">
+                <div class="cta-inner rounded">
+                    <div class="card">
+                        <div class="card-body form-group">
+                            <label>Role:</label>
+                            <select class="form-control" v-model="skilltree.role">
+                                <option v-for="rol in Proficiency" v-bind:value="rol">{{rol}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div v-for="(skill,index) in skilltree.skill" :key="skill.id">
+                        <div class="card mt-4">
+                            <div class="card-header" :style="'background-color:'+skill.level.color">
+                                <input type="hidden" v--model="skill.level"> Skill level: {{skill.level.id}}
+                            </div>
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="form-group col-8">
+                                        <label for="mlevel">Name:</label>
+                                        <input class="form-control" v-model="skill.nome"></textarea>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="mlevel">CP:</label>
+                                        <input class="form-control" readonly v-model="skill.capacidadepoder"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>Range:</label>
+                                        <select class="form-control" v-model="skill.alcance">
+                                            <option v-for="alc in alcances" v-bind:value="alc">{{alc}} square
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="mlevel">Target:</label>
+                                        <input class="form-control" v-model="skill.alvo">
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Uso :</label>
+                                        <textarea class="form-control" rows="3" v-model="skill.uso"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Uso CP:
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning"
+                                                    v-on:click="skill.changeUCP(-0.5)"><i
+                                                        class="fas fa-caret-down"></i></button>
+                                                <button type="button" class="btn btn-primary"
+                                                    v-on:click="skill.changeUCP(0.5)"><i
+                                                        class="fas fa-caret-up"></i></button>
+                                            </div>
+                                        </label>
+                                        <input type="number" readonly class="form-control" v-model="skill.usocp">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Effect :</label>
+                                        <textarea class="form-control" rows="3" v-model="skill.efeito"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Effect CP:
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning"
+                                                    v-on:click="skill.changeECP(-0.5)"><i
+                                                        class="fas fa-caret-down"></i></button>
+                                                <button type="button" class="btn btn-primary"
+                                                    v-on:click="skill.changeECP(0.5)"><i
+                                                        class="fas fa-caret-up"></i></button>
+                                            </div>
+                                        </label>
+                                        <input type="number" readonly class="form-control" v-model="skill.efeitocp">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" v-model="skill.temp" :id="'tempchk'+index">
+                                            <label class="form-check-label" :for="'tempchk'+index">
+                                                Temporary effect
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section about-heading impressaoNao">
+            <div class="container">
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/skilltree.jpg" alt="">
+                <div class="about-heading-content">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-10 mx-auto">
+                            <div class="bg-faded rounded p-5">
+                                <h2 class="section-heading mb-4">
+                                    <span class="section-heading-upper">Considerações para criação</span>
+                                    <span class="section-heading-lower">SKILL TREES</span>
+                                </h2>
+                                <ul>
+                                    <li>Cada <strong> role </strong> terá sua Skill tree própria. Todos os personagens
+                                        do mesmo role utilizam a mesma skill tree.</li>
+                                    <li>Cada skill tree será composta de 2 árvores, cada uma com 6 habilidades cada.
+                                        <ul>
+                                            <li>O jogador precisa ter 2 habilidades naquela árvore para poder pegar uma
+                                                habilidade nível 2.</li>
+                                            <li>O jogador precisa ter 3 habilidades naquela árvore para poder pegar uma
+                                                habilidade nível 3.</li>
+                                        </ul>
+                                    </li>
+                                    <ul>
+                                        <li>Três habilidades de nível 1.</li>
+                                        <li>Duas habilidades de nível 2.</li>
+                                        <li>Uma habilidade de nível 3.</li>
+                                    </ul>
+                                    <li>Todas as habilidades devem ser habilidades ativas. Elas não podem haver
+                                        passivas.</li>
+                                    <li>No início de cada missão o jogador pode realocar todos os seus Level up Tokens,
+                                        comprando novas Skills na Tree, seguindo as regras a cima.</li>
+                                    <li>Como o limite é de 7 Level Up tokens para cada jogador, não existe como um
+                                        jogador adquirir as duas skills de level 3 ao mesmo tempo.</li>
+                                    <li>A ideia é que as habilidades das skill trees sejam focadas em coisas para o
+                                        jogador fazer durante o turno dos outros jogadores ou dos inimigos, fazendo com
+                                        que ele mantenha atenção e interesse no jogo.</li>
+                                    <li>É interessante que existam condições ou gatilhos para seu uso.</li>
+                                    <li>Efeitos no turno dos monstros não devem ser para beneficiar você, mas sim
+                                        aliados. A ideia é que os efeitos disparem no turno de outro jogador ou quando
+                                        outro jogador está sendo atacado, de forma que você sempre tenha uma motivação
+                                        para se manter focado no jogo, esperando a hora de usar a sua skill. Ou então
+                                        que disparem no turno de seus aliados para beneficiar você ou um aliado, ou
+                                        mesmo prejudicar um monstro, mas com um gatilho que o aliado precisa causar.
+                                        <ul>
+                                            <li>O conceito central é fazer com que o jogador tenha interesse em prestar
+                                                atenção em momentos do jogo que ele não está sendo o alvo dos ataques, e
+                                                que ele não é o jogador escolhendo sua ação.</li>
+                                        </ul>
+                                    </li>
+                                    <li>As habilidades <strong> não podem causar efeitos que precisam ser marcados
+                                        </strong> em você ou no oponente pois não existem marcadores para isso.</li>
+                                    <li>Os efeitos devem ser focados em coisas que acontecem <strong> fora de seu turno
+                                        </strong> .</li>
+                                    <li>O jogador <strong> sempre </strong> irá gastar uma quantidade de PP’s para
+                                        ativar a skill igual a nível da skill na árvore. (Skills nível 1 = 1 PP para
+                                        ativar, Skills nível 2 = 2PP…)</li>
+                                    <li>O jogador no máximo terá 7 Level Up Tokens, que são utilizados para adquirir as
+                                        Skills na Skill Tree.</li>
+                                </ul>
+                                <p><strong> Cada designer está fazendo 1 Tree, com 3 habilidades de nível 1, 2 de nível
+                                        2, e 1 de nível 3.  </strong></p>
+                                <ul>
+                                    <li>Será importante conversarem com o outro designer fazendo a outra tree do seu
+                                        personagem para alinharem as ideias de builds! </li>
+                                    <li>É importante que as skill trees tenham objetivos e funções diferentes, mas
+                                        estejam dentro do tema do role.</li>
+                                </ul>
+                                <p>As skills devem seguir a seguinte regra de balanceamento:</p>
+                                <ul>
+                                    <li>Level 1: 2 CP</li>
+                                    <li>Level 2: 5 CP</li>
+                                    <li>Level 3: 8 CP</li>
+                                </ul>
+                                <p>Exemplos de Skills da Skill Tree:</p>
+                                <p><strong> Brother in Arms </strong> Tank LV1 <br /> <strong> Target </strong> : 1
+                                    adjacent ally <br /> <strong> Usage </strong> : after an enemy’s attack roll <br />
+                                    <strong> Effect </strong> : Redirect up to 6 damage from the target to you</p>
+                                <p><strong> Warning Shout Tank </strong> LV2 <br /> <strong> Target </strong> : 1 ally
+                                    within 5 squares of you <br /> <strong> Usage </strong> : before an enemy’s attack
+                                    roll <br /> <strong> Effect </strong> : The target gets +5 defense against the first
+                                    attack roll.</p>
+                                <p><strong> Intervening Charge </strong> Tank LV3  <br /> <strong> Target </strong> : 1
+                                    enemy within 5 squares of you <br /> <strong> Usage </strong> : after an enemy
+                                    declares an ally as a target of an attack <br /> <strong> Effect </strong> : You
+                                    move up to 5 squares to a square adjacent to the target. He takes 2 points of damage
+                                    and is considered weakened for that attack. The target of that attack is considered
+                                    protected and toughened.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer text-faded text-center py-5 impressaoNao">
+            <div class="container">
+                <p class="m-0 small">Feito na Casa do Goblin 2020</p>
+            </div>
+        </footer>
+
+        <div class="modal" id="ModalLibrary">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tanares Design Library</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" id="librarycontent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="js/Progressao.js"></script>
+    <script src="js/enum.js"></script>
+    <script src="js/helper.js"></script>
+
+    <script>
+        var myObject = new Vue({
+            el: '#app',
+            data: {
+                skilltree: {
+                    role: "",
+                    skill: [],
+                },
+
+            },
+            created: function () {
+                for (let index = 0; index < skilllevels.length; index++) {
+                    let skill = new Progressao();
+                    skill.level = skilllevels[index];
+                    this.skilltree.skill.push(skill);
+                }
+                if (sessionStorage.skilltree != "null" && sessionStorage.skilltree != "undefined") {
+                    this.jsonToSkilltree(sessionStorage.skilltree);
+                }
+
+            },
+            mounted: function () {
+                document.addEventListener('focus', this.saveSession, true);
+                loadLibrary('librarycontent');
+            },
+            methods: {
+                saveSession: function () {
+                    sessionStorage.skilltree = JSON.stringify(this.skilltree);
+                },
+                download: function () {
+                    let element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.skilltree)));
+                    element.setAttribute('download', "skilltree_" + this.skilltree.role);
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                },
+                getFile: function (event) {
+                    let file = event.target.files[0];
+                    let reader = new FileReader();
+                    reader.onload = this.loadSkill;
+                    reader.readAsText(file);
+
+                },
+                loadSkill: function (evt) {
+                    try {
+                        this.jsonToSkilltree(evt.target.result);
+                    } catch (error) {
+                        alert(error);
+                    }
+                },
+                jsonToSkilltree: function (stringJson) {
+                    try {
+                        let loadskill = JSON.parse(stringJson);
+                        this.skilltree.role = loadskill.role;
+                        for (let index = 0; index < loadskill.skill.length; index++) {
+                            this.skilltree.skill[index].load(loadskill.skill[index]);
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

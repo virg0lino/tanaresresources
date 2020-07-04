@@ -12,7 +12,9 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -21,83 +23,63 @@
 </head>
 
 <body>
-
-    <h1 class="site-heading text-center text-white  d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">tanares resource maker</span>
-        <span class="site-heading-lower">
-      <img class="intro-img img-fluid rounded" width="600px" src="img/topo.png" alt="">
-    </span>
-    </h1>
-    <section class="page-section clearfix">
-        <div class="container">
-            <div class="intro">
-                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="img/monstro.jpg" alt="">
-                <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-                    <h2 class="section-heading mb-4">
-                        <span class="section-heading-upper">inspire fear</span>
-                        <span class="section-heading-lower">Monsters set</span>
-                    </h2>
-                    <p class="mb-3">
-                        Construa monstros, que irão desafiar os jogadores e os farão pensar em cada movimento
-                    </p>
-                    <div class="intro-button mx-auto">
-                        <a class="btn btn-primary btn-xl" href="monstro.html">GO!</a>
+    <div id="app">
+        <h1 class="site-heading text-center text-white  d-lg-block">
+            <span class="site-heading-upper text-primary mb-3">tanares resource maker</span>
+            <span class="site-heading-lower">
+                <img class="intro-img img-fluid rounded" width="600px" src="img/topo.png" alt="">
+            </span>
+        </h1>
+        <section v-if="status==1" class="page-section clearfix" v-for="item in ItensMenu">
+            <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" :src="item.image" alt="">
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">{{item.subtitle}}</span>
+                            <span class="section-heading-lower">
+                                {{item.title}}
+                                <span v-if="item.isnew" class="badge badge-success" style="font-size:10pt;    vertical-align: text-top;">Novo</span>
+                            </span>
+                        </h2>
+                        <p class="mb-3">
+                            {{item.description}}
+                        </p>
+                        <div class="intro-button mx-auto">
+                            <a class="btn btn-primary btn-xl" :href="item.url">GO!</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="page-section clearfix">
-        <div class="container">
-            <div class="intro">
-                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="img/ataque.jpg" alt="">
-                <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-                    <h2 class="section-heading mb-4">
-                        <span class="section-heading-upper">BUILD POSSIBILITIES</span>
-                        <span class="section-heading-lower">Attack Set</span>
-                    </h2>
-                    <p class="mb-3">
-                        Construa ataques que trarão escolhas e versatilidade para o gameplay, e farão nossos herois poderosos
-                    </p>
-                    <div class="intro-button mx-auto">
-                        <a class="btn btn-primary btn-xl" href="ataque.html">GO!</a>
-                    </div>
-                </div>
+
+        <footer class="footer text-faded text-center py-5 ">
+            <div class="container ">
+                <p class="m-0 small ">Feito na Casa do goblin 2020</p>
             </div>
-        </div>
-    </section>
-
-    <section class="page-section clearfix">
-        <div class="container">
-            <div class="intro">
-                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="img/item.jpg" alt="">
-                <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-                    <h2 class="section-heading mb-4">
-                        <span class="section-heading-upper">forge power</span>
-                        <span class="section-heading-lower">Item set</span>
-                    </h2>
-                    <p class="mb-3">A grande forja onde você poderá criar itens unicos que serão escolhidos a cada missão, aumentando o poder dos herois e danocada vez mais variabilidade as partidas
-                    </p>
-                    <div class="intro-button mx-auto">
-                        <a class="btn btn-primary btn-xl" href=item.html ">GO!</a>
-          </div>
-        </div>
-      </div>
+        </footer>
     </div>
-  </section>
-
-
-  <footer class="footer text-faded text-center py-5 ">
-    <div class="container ">
-      <p class="m-0 small "> Casa do Coblin 2020</p>
-    </div>
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js "></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js "></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="js/enum.js"></script>
 
 </body>
+<script>
+    var myObject = new Vue({
+        el: '#app',
+        data: {
+            status:0,
+
+        },
+        mounted: function() {
+            this.status =1;   
+
+        },
+    })
+
+</script>
 
 </html>
