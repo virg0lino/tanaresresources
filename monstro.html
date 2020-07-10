@@ -12,7 +12,9 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -25,14 +27,16 @@
             .impressaoNao {
                 display: none;
             }
+
             .impressao {
                 display: block;
             }
+
             .newpage {
                 page-break-after: always;
             }
         }
-        
+
         @media screen {
             .impressao {
                 display: none;
@@ -52,31 +56,37 @@
                     {{m.nome}}, Level: {{m.level.id}} ({{m.cor.cor}})<br> Category: {{m.categoria}}<br>
                     <span>Stats:</span>
                     <div class="ml-2">
-                        {{m.hp}} HP<br> {{m.ba}} Basic Attack<br> {{m.def}} Def<br> {{m.mv}} Movement <br> Features (CP={{m.fcp}}): {{m.feature}}<br>
+                        {{m.hp}} HP<br> {{m.ba}} Basic Attack<br> {{m.def}} Def<br> {{m.mv}} Movement <br> Features
+                        (CP={{m.fcp}}): {{m.feature}}<br>
                     </div>
                     {{m.hasSpecial?'Special Attack':'Primary Attack'}}:<br>
                     <span v-for="ataque in m.attack">
                         <div class="ml-2">
-                        {{ataque.nome}} ({{ataque.fontedepoder.toString()}})<br>
-                        Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
-                        <div v-if="ataque.beneficio!=''">Beneft <span v-if="ataque.beneficiocp!=0">(CP={{ataque.beneficiocp}})</span>: {{ataque.beneficio}}
-                    <br>
+                            {{ataque.nome}} ({{ataque.fontedepoder.toString()}})<br>
+                            Range: ({{ataque.alcance}}) square / Target: {{ataque.alvo}}<br>
+                            <div v-if="ataque.beneficio!=''">Beneft <span
+                                    v-if="ataque.beneficiocp!=0">(CP={{ataque.beneficiocp}})</span>:
+                                {{ataque.beneficio}}
+                                <br>
+                            </div>
+                            <div v-if="ataque.penalidade!=''">Drawback <span
+                                    v-if="ataque.penalidadecp!=0">(CP={{ataque.penalidadecp}})</span>:
+                                {{ataque.penalidade}}<br>
+                            </div>
+                            Hit: ({{ataque.danoacerto}}) damage + effect<br>
+                            <div v-if="ataque.danoerro!=''">
+                                Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
+                            <div v-if="ataque.efeito!=''">
+                                Effect <span v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>:
+                                {{ataque.efeito}}
+                                <br>
+                            </div>
+                    </span>
                 </div>
-                <div v-if="ataque.penalidade!=''">Drawback <span v-if="ataque.penalidadecp!=0">(CP={{ataque.penalidadecp}})</span>: {{ataque.penalidade}}<br>
-                </div>
-                Hit: ({{ataque.danoacerto}}) damage + effect<br>
-                <div v-if="ataque.danoerro!=''">
-                    Miss: ({{ataque.danoerro}}) Residual Damage<br></div>
-                <div v-if="ataque.efeito!=''">
-                    Effect <span v-if="ataque.efeitocp!=0">(CP={{ataque.efeitocp}})</span>: {{ataque.efeito}}
-                    <br>
-                </div>
-                </span>
+                <div>Temporary (Temp): Termina no inicio do seu próximo turno.</div>
+                Command Basic Strategy: {{m.strategy}}<br>
             </div>
-            <div>Temporary (Temp): Termina no inicio do seu próximo turno.</div>
-            Command Basic Strategy: {{m.strategy}}<br>
         </div>
-    </div>
     </div>
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
@@ -89,7 +99,8 @@
         <div class="container">
             <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#!">
                 MONSTERS SET</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse  navbar-collapse" id="navbarResponsive">
@@ -99,18 +110,21 @@
                         </a>
                     </li>
                     <li class="nav-item  px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="#!" onclick="sessionStorage.monsters=null;location.reload();">
+                        <a class="nav-link text-uppercase text-expanded" href="#!"
+                            onclick="sessionStorage.monsters=null;location.reload();">
                             <i class="fas fa-file"></i> Novo
                         </a>
                     </li>
                     <li class="nav-item px-lg-4">
                         <input id="fileInput" type="file" accept=".txt" style="display:none;" v-on:change="getFile" />
-                        <a class="nav-link text-uppercase text-expanded" href="#!" onclick="document.getElementById('fileInput').click();">
+                        <a class="nav-link text-uppercase text-expanded" href="#!"
+                            onclick="document.getElementById('fileInput').click();">
                             <i class="far fa-folder-open"></i> Abrir
                         </a>
                     </li>
                     <li class="nav-item  px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="#!" v-on:click="download(monsters,'monstros')">
+                        <a class="nav-link text-uppercase text-expanded" href="#!"
+                            v-on:click="download(monsters,'monstros')">
                             <i class="fas fa-download"></i> Salvar
                         </a>
                     </li>
@@ -120,7 +134,8 @@
                         </a>
                     </li>
                     <li class="nav-item  px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="#!" data-toggle="modal" data-target="#ModalLibrary">
+                        <a class="nav-link text-uppercase text-expanded" href="#!" data-toggle="modal"
+                            data-target="#ModalLibrary">
                             <i class="fas fa-book"></i> Livraria
                         </a>
                     </li>
@@ -141,15 +156,15 @@
                                 <div class="form-group col-md-4">
                                     <label for="mlevel">Level:</label>
                                     <select class="form-control" v-model="monster.level">
-                                    <option v-for="level in monsterlevels" v-bind:value="level">Level {{level.id}}
-                                    </option>
-                                </select>
+                                        <option v-for="level in monsterlevels" v-bind:value="level">Level {{level.id}}
+                                        </option>
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="mlevel">Category:</label>
                                     <select class="form-control" v-model="monster.categoria">
-                                    <option v-for="c in monsterCategory" v-bind:value="c">{{c}}</option>
-                                </select>
+                                        <option v-for="c in monsterCategory" v-bind:value="c">{{c}}</option>
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="txtcp">CP:</label>
@@ -170,42 +185,48 @@
                                 <div class="form-group col-md-6">
                                     <label>Power source :</label>
                                     <select class="form-control" v-model="monster.fp">
-                                    <option v-for="f in fontesPoder" v-bind:value="f">{{f}}</option>
-                                </select>
+                                        <option v-for="f in fontesPoder" v-bind:value="f">{{f}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="txthp">HP:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeHP(-1)"><i class="fas fa-caret-down"></i></button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeHP(1)"><i class="fas fa-caret-up"></i></button>
-                                    </div>
-                                </label>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning"
+                                                v-on:click="monster.changeHP(-1)"><i
+                                                    class="fas fa-caret-down"></i></button>
+                                            <button type="button" class="btn btn-primary"
+                                                v-on:click="monster.changeHP(1)"><i
+                                                    class="fas fa-caret-up"></i></button>
+                                        </div>
+                                    </label>
                                     <input type="number" readonly class="form-control" v-model="monster.hp">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Basic Attack:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeBA(-1)"><i class="fas fa-caret-down"></i></button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeBA(1)"><i class="fas fa-caret-up"></i></button>
-                                    </div>
-                                </label>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning"
+                                                v-on:click="monster.changeBA(-1)"><i
+                                                    class="fas fa-caret-down"></i></button>
+                                            <button type="button" class="btn btn-primary"
+                                                v-on:click="monster.changeBA(1)"><i
+                                                    class="fas fa-caret-up"></i></button>
+                                        </div>
+                                    </label>
                                     <input type="number" readonly class="form-control" v-model="monster.ba">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Def:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeDF(-1)"><i class="fas fa-caret-down"></i></button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeDF(1)"><i class="fas fa-caret-up"></i></button>
-                                    </div>
-                                </label>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning"
+                                                v-on:click="monster.changeDF(-1)"><i
+                                                    class="fas fa-caret-down"></i></button>
+                                            <button type="button" class="btn btn-primary"
+                                                v-on:click="monster.changeDF(1)"><i
+                                                    class="fas fa-caret-up"></i></button>
+                                        </div>
+                                    </label>
                                     <input type="number" readonly class="form-control" v-model="monster.def">
                                 </div>
                                 <!--  <div class="form-group col-md-3">
@@ -223,25 +244,30 @@
                             <div class="row">
                                 <div class="form-group col-md-9">
                                     <label for="txtft">Features:</label>
-                                    <textarea type="text" class="form-control" rows="3" v-model="monster.feature"></textarea>
+                                    <textarea type="text" class="form-control" rows="3"
+                                        v-model="monster.feature"></textarea>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="txtfcp">Features CP:
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-warning"
-                                            v-on:click="monster.changeFCP(-0.5)"><i class="fas fa-caret-down"></i></button>
-                                        <button type="button" class="btn btn-primary"
-                                            v-on:click="monster.changeFCP(0.5)"><i class="fas fa-caret-up"></i></button>
-                                    </div>
-                                </label>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning"
+                                                v-on:click="monster.changeFCP(-0.5)"><i
+                                                    class="fas fa-caret-down"></i></button>
+                                            <button type="button" class="btn btn-primary"
+                                                v-on:click="monster.changeFCP(0.5)"><i
+                                                    class="fas fa-caret-up"></i></button>
+                                        </div>
+                                    </label>
                                     <input type="number" readonly class="form-control" v-model="monster.fcp">
                                 </div>
                             </div>
                             <div class="row mt-1 mb-2">
                                 <div class="col">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" v-bind:id="'customSwitch'+index" v-model="monster.hasSpecial">
-                                        <label class="custom-control-label" v-bind:for="'customSwitch'+index">Special Attack</label>
+                                        <input type="checkbox" class="custom-control-input"
+                                            v-bind:id="'customSwitch'+index" v-model="monster.hasSpecial">
+                                        <label class="custom-control-label" v-bind:for="'customSwitch'+index">Special
+                                            Attack</label>
                                     </div>
                                 </div>
                             </div>
@@ -260,16 +286,18 @@
                                                 </div>
                                                 <div class="form-group col-4">
                                                     <label>CP:</label>
-                                                    <input type="number" readonly class="form-control" v-model="ataque.capacidadepoder">
+                                                    <input type="number" readonly class="form-control"
+                                                        v-model="ataque.capacidadepoder">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-4">
                                                     <label>Range:</label>
                                                     <select class="form-control" v-model="ataque.alcance">
-                                                    <option v-for="alc in alcances" v-bind:value="alc">{{alc}} square
-                                                    </option>
-                                                </select>
+                                                        <option v-for="alc in alcances" v-bind:value="alc">{{alc}}
+                                                            square
+                                                        </option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="mlevel">Target:</label>
@@ -280,99 +308,119 @@
                                                     <label for="mlevel">Power source:</label><br>
                                                     <div class="form-check-inline" v-for="(fp,index) in fontesPoder">
                                                         <label class="form-check-label">
-                                                        <input type="checkbox" v-bind:id="fp+index" v-bind:value="fp"
-                                                            v-model="ataque.fontedepoder" class="form-check-input">
-                                                        {{fp}}
-                                                    </label>
+                                                            <input type="checkbox" v-bind:id="fp+index"
+                                                                v-bind:value="fp" v-model="ataque.fontedepoder"
+                                                                class="form-check-input">
+                                                            {{fp}}
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-9">
                                                     <label>Beneft:</label>
-                                                    <textarea class="form-control" rows="3" v-model="ataque.beneficio"></textarea>
+                                                    <textarea class="form-control" rows="3"
+                                                        v-model="ataque.beneficio"></textarea>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label>Beneft CP:
-                                                                <div class="btn-group btn-group-sm">
-                                                                    <button type="button" class="btn btn-warning"
-                                                                        v-on:click="monster.changeCP(ataque.changeBCP(-0.5))"><i class="fas fa-caret-down"></i></button>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        v-on:click="monster.changeCP(ataque.changeBCP(0.5))"><i class="fas fa-caret-up"></i></button>
-                                                                </div>
-                                                            </label>
-                                                    <input type="number" readonly class="form-control" v-model="ataque.beneficiocp">
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning"
+                                                                v-on:click="monster.changeCP(ataque.changeBCP(-0.5))"><i
+                                                                    class="fas fa-caret-down"></i></button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                v-on:click="monster.changeCP(ataque.changeBCP(0.5))"><i
+                                                                    class="fas fa-caret-up"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input type="number" readonly class="form-control"
+                                                        v-model="ataque.beneficiocp">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-9">
                                                     <label>Drawback:</label>
-                                                    <textarea class="form-control" rows="3" v-model="ataque.penalidade"></textarea>
+                                                    <textarea class="form-control" rows="3"
+                                                        v-model="ataque.penalidade"></textarea>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="txtacp">Drawback CP:
-                                                                <div class="btn-group btn-group-sm">
-                                                                    <button type="button" class="btn btn-warning"
-                                                                        v-on:click="monster.changeCP(ataque.changePCP(-0.5))"><i class="fas fa-caret-down"></i></button>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        v-on:click="monster.changeCP(ataque.changePCP(0.5))"><i class="fas fa-caret-up"></i></button>
-                                                                </div>
-                                                            </label>
-                                                    <input type="number" readonly class="form-control" v-model="ataque.penalidadecp">
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning"
+                                                                v-on:click="monster.changeCP(ataque.changePCP(-0.5))"><i
+                                                                    class="fas fa-caret-down"></i></button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                v-on:click="monster.changeCP(ataque.changePCP(0.5))"><i
+                                                                    class="fas fa-caret-up"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input type="number" readonly class="form-control"
+                                                        v-model="ataque.penalidadecp">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-4" v-if="!monster.hasSpecial">
                                                     <label>Hit:
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeDG(ataque.changeDG(-1));"><i class="fas fa-caret-down"></i></button>
-                                                        <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeDG(ataque.changeDG(1));"><i class="fas fa-caret-up"></i></button>
-                                                    </div>
-                                                </label>
-                                                    <input class="form-control" readonly v-model="monster.dg"></textarea>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning"
+                                                                v-on:click="monster.changeDG(ataque.changeDG(-1));"><i
+                                                                    class="fas fa-caret-down"></i></button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                v-on:click="monster.changeDG(ataque.changeDG(1));"><i
+                                                                    class="fas fa-caret-up"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input class="form-control" readonly
+                                                        v-model="monster.dg"></textarea>
                                                 </div>
                                                 <div class="form-group col-md-4" v-else>
                                                     <label>Hit:
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));"><i class="fas fa-caret-down"></i></button>
-                                                        <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));"><i class="fas fa-caret-up"></i></button>
-                                                    </div>
-                                                     Livre
-                                                </label>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning"
+                                                                v-on:click="monster.changeCP(ataque.changeCP(-0.5));"><i
+                                                                    class="fas fa-caret-down"></i></button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                v-on:click="monster.changeCP(ataque.changeCP(0.5));"><i
+                                                                    class="fas fa-caret-up"></i></button>
+                                                        </div>
+                                                        Livre
+                                                    </label>
                                                     <input class="form-control" v-model="monster.dg"></textarea>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label>Miss:
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(-0.5));"><i class="fas fa-caret-down"></i></button>
-                                                        <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeCP(0.5));"><i class="fas fa-caret-up"></i></button>
-                                                    </div>
-                                                     Livre
-                                                </label>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning"
+                                                                v-on:click="monster.changeCP(ataque.changeCP(-0.5));"><i
+                                                                    class="fas fa-caret-down"></i></button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                v-on:click="monster.changeCP(ataque.changeCP(0.5));"><i
+                                                                    class="fas fa-caret-up"></i></button>
+                                                        </div>
+                                                        Livre
+                                                    </label>
                                                     <input class="form-control" v-model="ataque.danoerro"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-9">
                                                     <label>Effect :</label>
-                                                    <textarea class="form-control" rows="3" v-model="ataque.efeito"></textarea>
+                                                    <textarea class="form-control" rows="3"
+                                                        v-model="ataque.efeito"></textarea>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label>Effect CP:
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" class="btn btn-warning"
-                                                            v-on:click="monster.changeCP(ataque.changeECP(-0.5))"><i class="fas fa-caret-down"></i></button>
-                                                        <button type="button" class="btn btn-primary"
-                                                            v-on:click="monster.changeCP(ataque.changeECP(0.5))"><i class="fas fa-caret-up"></i></button>
-                                                    </div>
-                                                </label>
-                                                    <input type="number" readonly class="form-control" v-model="ataque.efeitocp">
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning"
+                                                                v-on:click="monster.changeCP(ataque.changeECP(-0.5))"><i
+                                                                    class="fas fa-caret-down"></i></button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                v-on:click="monster.changeCP(ataque.changeECP(0.5))"><i
+                                                                    class="fas fa-caret-up"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input type="number" readonly class="form-control"
+                                                        v-model="ataque.efeitocp">
                                                 </div>
                                             </div>
                                         </div>
@@ -405,32 +453,56 @@
                                 <span class="section-heading-lower">Monstros </span>
                             </h2>
                             <ul>
-                                <li>Cada desenvolvedor irá criar 4 monstros distintos, todos do mesmo nível, conforme a tabela ao final desta seção do documento. Os seus status serão parte de uma carta em tamanho padrão.<br /><br /></li>
-                                <li>Cada monstro, dos 4 de cada grupo, terá estatísticas únicas e habilidades diversas. É importante que cada um deles tenha efeitos em seus ataques, e que cada um possua uma estratégia básica distinta.<br /><br /></li>
-                                <li>Podem existir monstros com ataque especial (inclusive com efeito permanente), mas após esse ataque o monstro só atacará com Basic Attack.<br /><br /></li>
-                                <li>Os monstros devem ser construídos de forma que funcionem tanto como um grupo, quanto separadamente em grupos sortidos de monstros diferentes.<br /><br /></li>
-                                <li>Os designers são livres para dar suas interpretações temáticas aos monstros, mantendo em mente um cenário de fantasia clássico.<br /><br /></li>
-                                <li>Existirão 4 miniaturas para cada tipo de monstro, e cada uma delas será anexada a uma base de cor distinta para que se possa identificar qual inimigo é qual carta de monstro. As cores são: Vermelho, Laranja, Azul e Verde.
-                                    Cada carta de monstro deve identificar a cor da base de sua miniatura.<br /><br /></li>
-                                <li>Monstros de base Vermelha e Laranja devem ser um pouco mais fortes que os demais, recebendo 1 CP extra, conforme descrito abaixo nas regras de construção de monstros.<br /><br /></li>
-                                <li>Monstros têm em geral um movimento de valor 6. Mudanças nos movimentos devem ser feitas com cuidado para evitar que o monstro perca turnos sem conseguir atacar nenhum jogador por questão de distância.<br /><br /></li>
-                                <li>Cada monstro terá uma carta de tamanho MINI-EURO que conterá as informações de seu ataque, e poderá ser utilizada para marcar efeitos. Efeitos permanentes só podem existir em caso do monstro ser um special attack, o que
-                                    fará com que o monstro só utilize ataques básicos após tê-lo utilizado. (Esta carta é em adição a carta tamanho normal que contém as estatísticas do monstro.)<br /><br /></li>
-                                <li>Os ataques dos monstros devem ter uma fonte de dano. O monsro em si não possui uma fonte de dano, mas sim um tipo de criatura como humanoide ou undead, por exemplo.</li>
+                                <li>Cada desenvolvedor irá criar 4 monstros distintos, todos do mesmo nível, conforme a
+                                    tabela ao final desta seção do documento. Os seus status serão parte de uma carta em
+                                    tamanho padrão.<br /><br /></li>
+                                <li>Cada monstro, dos 4 de cada grupo, terá estatísticas únicas e habilidades diversas.
+                                    É importante que cada um deles tenha efeitos em seus ataques, e que cada um possua
+                                    uma estratégia básica distinta.<br /><br /></li>
+                                <li>Podem existir monstros com ataque especial (inclusive com efeito permanente), mas
+                                    após esse ataque o monstro só atacará com Basic Attack.<br /><br /></li>
+                                <li>Os monstros devem ser construídos de forma que funcionem tanto como um grupo, quanto
+                                    separadamente em grupos sortidos de monstros diferentes.<br /><br /></li>
+                                <li>Os designers são livres para dar suas interpretações temáticas aos monstros,
+                                    mantendo em mente um cenário de fantasia clássico.<br /><br /></li>
+                                <li>Existirão 4 miniaturas para cada tipo de monstro, e cada uma delas será anexada a
+                                    uma base de cor distinta para que se possa identificar qual inimigo é qual carta de
+                                    monstro. As cores são: Vermelho, Laranja, Azul e Verde.
+                                    Cada carta de monstro deve identificar a cor da base de sua miniatura.<br /><br />
+                                </li>
+                                <li>Monstros de base Vermelha e Laranja devem ser um pouco mais fortes que os demais,
+                                    recebendo 1 CP extra, conforme descrito abaixo nas regras de construção de
+                                    monstros.<br /><br /></li>
+                                <li>Monstros têm em geral um movimento de valor 6. Mudanças nos movimentos devem ser
+                                    feitas com cuidado para evitar que o monstro perca turnos sem conseguir atacar
+                                    nenhum jogador por questão de distância.<br /><br /></li>
+                                <li>Cada monstro terá uma carta de tamanho MINI-EURO que conterá as informações de seu
+                                    ataque, e poderá ser utilizada para marcar efeitos. Efeitos permanentes só podem
+                                    existir em caso do monstro ser um special attack, o que
+                                    fará com que o monstro só utilize ataques básicos após tê-lo utilizado. (Esta carta
+                                    é em adição a carta tamanho normal que contém as estatísticas do
+                                    monstro.)<br /><br /></li>
+                                <li>Os ataques dos monstros devem ter uma fonte de dano. O monsro em si não possui uma
+                                    fonte de dano, mas sim um tipo de criatura como humanoide ou undead, por exemplo.
+                                </li>
                             </ul>
                             <p><strong>Categorias de Monstros:</strong></p>
                             <p>Boss, Humanoid, Magic Beast and Undead</p>
-                            <p>Proporções de tipos de monstros existentes: (<em>para ajudar no balanceamento de ataque</em>s)<br />(<em>Tratam-se de quantos monstros existem de cada tipo!</em>)</p>
+                            <p>Proporções de tipos de monstros existentes: (<em>para ajudar no balanceamento de
+                                    ataque</em>s)<br />(<em>Tratam-se de quantos monstros existem de cada tipo!</em>)
+                            </p>
                             <p>Magic Beast: 8<br />Undead: 6<br />Humanoid: 11</p>
                             <p><strong>VALORES DE BALANCEAMENTO DE MONSTROS:</strong></p>
-                            <p>Assim como para os itens a mesma regra de CP se aplica aos monstros e vilões em geral.</p>
+                            <p>Assim como para os itens a mesma regra de CP se aplica aos monstros e vilões em geral.
+                            </p>
                             <p><strong>Legenda/Conversão para Capacidade de Poder (CP) de Vilão:</strong></p>
                             <p>1 CP é igual:</p>
                             <ul>
                                 <li>+1 no ataque/defesa</li>
                                 <li>+1 no dano</li>
                                 <li>+5 HP</li>
-                                <li>+4 dano com alguma condição especial<br /><em>(Estas proporções valem para os vilões, para os itens e habilidades de heróis, o HP vale +10.)</em></li>
+                                <li>+4 dano com alguma condição especial<br /><em>(Estas proporções valem para os
+                                        vilões, para os itens e habilidades de heróis, o HP vale +10.)</em></li>
                             </ul>
                             <p><strong>Feature (propriedade passiva), exemplos de +1:</strong></p>
                             <ul>
@@ -456,8 +528,12 @@
                                 <li><strong>Verde/Azul: 5 CP, +2 to Attack Rolls</strong></li>
                                 <li><strong>Laranja/Vermelho: 6 CP, +2 to Attack Rolls</strong></li>
                             </ul>
-                            <p><strong>Miss Residual Damage médio por Level:</strong><br />Monstro Lvl 1 - 5 Residual Damage<br />Monstro Lvl 2 - 8 Residual Damage<br />Monstro Lvl 3 - 10 Residual Damage<br /><strong><br /></strong>É possível reduzir atributos
-                                ou ampliar atributos básicos utilizando a mesma tabela de CP para manter as proporções de balanceamento. Você pode fazer um inimigo level 2 com somente 35 de HP, ganhando 1 CP extra, para comprar +1 de dano para seu ataque
+                            <p><strong>Miss Residual Damage médio por Level:</strong><br />Monstro Lvl 1 - 5 Residual
+                                Damage<br />Monstro Lvl 2 - 8 Residual Damage<br />Monstro Lvl 3 - 10 Residual
+                                Damage<br /><strong><br /></strong>É possível reduzir atributos
+                                ou ampliar atributos básicos utilizando a mesma tabela de CP para manter as proporções
+                                de balanceamento. Você pode fazer um inimigo level 2 com somente 35 de HP, ganhando 1 CP
+                                extra, para comprar +1 de dano para seu ataque
                                 primary, por exemplo.</p>
                             <p><strong>TABELA DE MONSTROS, TIPOS E NÍVEIS:</strong></p>
                             <table class="table table-striped">
@@ -799,7 +875,7 @@
             data: {
                 monsters: [],
             },
-            created: function() {
+            created: function () {
                 for (let index = 0; index < monstercolors.length; index++) {
                     let monster = new Monstro();
                     monster.level = monsterlevels[0];
@@ -814,15 +890,15 @@
                 }
 
             },
-            mounted: function() {
+            mounted: function () {
                 document.addEventListener('focus', this.saveSession, true);
                 loadLibrary('librarycontent');
             },
             methods: {
-                saveSession: function() {
+                saveSession: function () {
                     sessionStorage.monsters = JSON.stringify(this.monsters);
                 },
-                getFile: function(event) {
+                getFile: function (event) {
                     let file = event.target.files[0];
                     let reader = new FileReader();
                     var that = this;
@@ -830,14 +906,14 @@
                     reader.readAsText(file);
 
                 },
-                loadMonster: function(evt) {
+                loadMonster: function (evt) {
                     try {
                         this.jsonToMonster(evt.target.result);
                     } catch (error) {
                         alert(error);
                     }
                 },
-                jsonToMonster: function(stringJson) {
+                jsonToMonster: function (stringJson) {
                     let loadmonster = JSON.parse(stringJson);
                     for (let index = 0; index < loadmonster.length; index++) {
                         this.monsters[index].level = loadmonster[index]._level;
