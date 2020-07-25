@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>tanares resource maker - Attack set</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/business-casual.min.css" rel="stylesheet">
+
+
+
+    <style>
+        @media print {
+            .impressaoNao {
+                display: none;
+            }
+
+            .impressao {
+                display: block;
+                color: black;
+            }
+       
+            .newpage {
+                page-break-after: always;
+            }
+        }
+
+        @media screen {
+            .impressao {
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div id="app" class="">
+
+        <div class="impressao">
+            <div class="card newpage">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="font-size: xx-large; color: black;">
+                                            {{hero.name}}
+                                            <small>({{hero.passivarole.name}}) </small>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="font-size: large; color: black;">
+                                            HP: {{hero.hp.value}} - 
+                                            BA: {{hero.ba.value}} ({{hero.getRangeDescription()}}) -
+                                            DEF: {{hero.df.value}} - 
+                                            MOV: {{hero.mv.value}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="row">
+                                        <div class="col-md-6 mt-2" v-for="ataque in hero.attacks">
+                                            <div class="card ">
+                                                <span style="font-size: large; color: black;" class="card-header" >
+                                                    {{ataque.name}} <small>CP:{{ataque.totalCp}}</small>
+                                                </span>
+                                                <div class="card-body">
+                                                    <span>Type: {{ataque.tipo.value}}</span><br>
+                                                    <span>Range: {{ataque.range+' squares /'+ataque.target}}</span><br>
+                                                    <span v-show="ataque.drawback.value!=''">Drawback:
+                                                        {{ataque.drawback.value}}<br></span>
+                                                    <span v-show="ataque.benefit.value!=''">Benefit:
+                                                        {{ataque.benefit.value}}<br></span>
+                                                    <span>Hit: {{ataque.hit.value+' damage + effect'}}</span><br>
+                                                    <span>Effect: {{ataque.effect.value}}</span>
+                                                </div>
+                                                <div class="card-footer">
+                                                    Miss: {{ataque.miss.value}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    {{hero.passivarole.passiva.name}}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    Trigger: {{hero.passivarole.passiva.trigger}}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    Effect: {{hero.passivarole.passiva.effect}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card newpage" v-show="hero.passivarole.passiva.name == 'Companion'">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="font-size: xx-large; color: black;">
+                                            {{hero.companion.name}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="font-size: large; color: black;">
+                                            HP: {{hero.companion.hp.value}} - 
+                                            BA: {{hero.companion.ba.value}} ({{hero.companion.getRangeDescription()}}) -
+                                            DEF: {{hero.companion.df.value}} - 
+                                            MOV: {{hero.companion.mv.value}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="row">
+                                        <div class="col-md-6 mt-2" v-for="ataque in hero.companion.attacks">
+                                            <div class="card">
+                                                <h5 class="card-header">
+                                                    {{ataque.name}} <small>CP:{{ataque.totalCp}}</small>
+                                                </h5>
+                                                <div class="card-body">
+                                                    <span>Type: {{ataque.tipo.value}}</span><br>
+                                                    <span><strong>Range</strong>: {{ataque.range+' squares /'+ataque.target}}</span><br>
+                                                    <span v-show="ataque.drawback.value!=''">Drawback:
+                                                        {{ataque.drawback.value}}<br></span>
+                                                    <span v-show="ataque.benefit.value!=''">Benefit:
+                                                        {{ataque.benefit.value}}<br></span>
+                                                    <span>Hit: {{ataque.hit.value+' damage + effect'}}</span><br>
+                                                    <span>Effect: {{ataque.effect.value}}</span>
+                                                </div>
+                                                <div class="card-footer">
+                                                    Miss: {{ataque.miss.value}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    {{hero.companion.specialFeature.name}}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    effect: {{hero.companion.specialFeature.effect.value}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h1 class="site-heading text-center text-white d-none d-lg-block">
+            <span class="site-heading-upper text-primary mb-3">MAKE HISTORY</span>
+            <span class="site-heading-lower">HERO</span>
+        </h1>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4 sticky-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">
+                    HERO</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse  navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!"
+                                onclick="sessionStorage.heroi=null;location.reload();">
+                                <i class="fas fa-file"></i> Novo
+                            </a>
+                        </li>
+                        <li class="nav-item px-lg-4">
+                            <input id="fileInput" type="file" accept=".txt" style="display:none;"
+                                v-on:change="getFile" />
+                            <a class="nav-link text-uppercase text-expanded" href="#!"
+                                onclick="document.getElementById('fileInput').click();">
+                                <i class="far fa-folder-open"></i> Abrir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!"
+                                v-on:click="download(hero,'heroi')">
+                                <i class="fas fa-download"></i> Salvar
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" onclick="print()">
+                                <i class="fas fa-print"></i> Imprimir
+                            </a>
+                        </li>
+                        <li class="nav-item  px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="#!" data-toggle="modal"
+                                data-target="#ModalLibrary">
+                                <i class="fas fa-book"></i> Livraria
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="page-section cta impressaoNao">
+            <div class="container ">
+                <div class="cta-inner rounded">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-9">
+                                    <label for="mlevel">Name:</label>
+                                    <input class="form-control" v-model="hero.name"></textarea>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label>Range:</label>
+                                    <select class="form-control" v-model="hero.range">
+                                        <option v-for="alc in ranges" v-bind:value="alc">{{alc}} square
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+
+                                    <label>Attribute Role:</label>
+                                    <select class="form-control" v-model="hero.atributosrole">
+                                        <option v-for="rol in Role" :value="rol">{{rol.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="txthp">HP:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.changeHP(-1)"><i class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.changeHP(1)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control" v-model="hero.hp.value">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>BA:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.changeBA(-1)"><i class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.changeBA(1)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control" v-model="hero.ba.value">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>DEF:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.changeDF(-1)"><i class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.changeDF(1)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control" v-model="hero.df.value">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>MOV:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.changeMV(-1)"><i class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.changeMV(1)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control" v-model="hero.mv.value">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body ">
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label>Passive Role:</label>
+                                    <select class="form-control" v-model="hero.passivarole">
+                                        <option v-for="rol in Role" v-bind:value="rol">{{rol.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <label>Name:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input class="form-control" v-model="hero.passivarole.passiva.name"></input>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <label>Trigger:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" rows="2"
+                                        v-model="hero.passivarole.passiva.trigger"></textarea>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <label>Effect:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" rows="2"
+                                        v-model="hero.passivarole.passiva.effect"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-for="(ataque,index) in hero.attacks" :key="ataque.id">
+                        <div class="card mt-4">
+                            <div class="card-header"
+                                :style="'background:'+(ataque.tipo.value==='Primary Attack'?'silver':'gold')">
+                                {{ataque.tipo.value}}
+                            </div>
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="form-group col-8">
+                                        <label for="mlevel">Name:</label>
+                                        <input class="form-control" v-model="ataque.name"></textarea>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="mlevel">CP total:</label>
+                                        <input class="form-control" readonly
+                                            :value="ataque.tipo.cp+'/'+ataque.totalCp"></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>Range:</label>
+                                        <select class="form-control" v-model="ataque.range">
+                                            <option v-for="alc in ranges" v-bind:value="alc">{{alc}} square
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="mlevel">Target(s): {{ataque.numberTarget}}
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    v-on:click="ataque.changeNumberTarget(-1)"><i
+                                                        class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    v-on:click="ataque.changeNumberTarget(1)"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div>
+                                        </label>
+                                        <input class="form-control" v-model="ataque.target">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Beneft:</label>
+                                        <textarea class="form-control" rows="3"
+                                            v-model="ataque.benefit.value"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Beneft CP:
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    v-on:click="ataque.changeBenefitCp(-0.5)"><i
+                                                        class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    v-on:click="ataque.changeBenefitCp(0.5)"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div>
+                                        </label>
+                                        <input type="number" readonly class="form-control" v-model="ataque.benefit.cp">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Drawback:</label>
+                                        <textarea class="form-control" rows="3"
+                                            v-model="ataque.drawback.value"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="txtacp">Drawback CP:
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    v-on:click="ataque.changeDrawbackCp(-0.5)"><i
+                                                        class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    v-on:click="ataque.changeDrawbackCp(0.5)"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div>
+                                        </label>
+                                        <input type="number" readonly class="form-control" v-model="ataque.drawback.cp">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Hit:
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    v-on:click="ataque.changeHitCp(-1)"><i
+                                                        class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    v-on:click="ataque.changeHitCp(1)"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div> CP: {{ataque.hit.cp}}
+                                        </label>
+                                        <input class="form-control" readonly v-model="ataque.hit.value"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Miss:
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    v-on:click="ataque.changeMissCp(-0.5)"><i
+                                                        class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    v-on:click="ataque.changeMissCp(0.5)"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div> Livre ({{ataque.miss.cp}})
+                                        </label>
+                                        <input class="form-control" v-model="ataque.miss.value"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-9">
+                                        <label>Effect :</label>
+                                        <textarea class="form-control" rows="3"
+                                            v-model="ataque.effect.value"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Effect CP:
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    v-on:click="ataque.changeEffectCp(-0.5)"><i
+                                                        class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    v-on:click="ataque.changeEffectCp(0.5)"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div>
+                                        </label>
+                                        <input type="number" readonly class="form-control" v-model="ataque.effect.cp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-4" v-show="hero.passivarole.passiva.name == 'Companion'">
+
+                        <div class="card-header">
+                            Companion
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-9">
+                                    <label for="mlevel">Name:</label>
+                                    <input class="form-control" v-model="hero.companion.name"></textarea>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label>Range:</label>
+                                    <select class="form-control" v-model="hero.companion.range">
+                                        <option v-for="alc in ranges" v-bind:value="alc">{{alc}} square
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="txthp">HP:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.companion.changeHP(-1)"><i
+                                                    class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.companion.changeHP(1)"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control"
+                                        v-model="hero.companion.hp.value">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>BA:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.companion.changeBA(-1)"><i
+                                                    class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.companion.changeBA(1)"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+
+                                    </label>
+                                    <input type="number" readonly class="form-control"
+                                        v-model="hero.companion.ba.value">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>DEF:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.companion.changeDF(-1)"><i
+                                                    class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.companion.changeDF(1)"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control"
+                                        v-model="hero.companion.df.value">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>MOV:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.companion.changeMV(-1)"><i
+                                                    class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.companion.changeMV(1)"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control"
+                                        v-model="hero.companion.mv.value">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <label>Special Feature</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label>Name:</label>
+                                    <input class="form-control" v-model="hero.companion.specialFeature.name"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-9">
+                                    <label>Effect :</label>
+                                    <textarea class="form-control" rows="3"
+                                        v-model="hero.companion.specialFeature.effect.value"></textarea>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Effect CP:
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.companion.changeEffectCp(-0.5)"><i
+                                                    class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="hero.companion.changeEffectCp(0.5)"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                    <input type="number" readonly class="form-control"
+                                        v-model="hero.companion.specialFeature.effect.cp">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <label>Prime Actions <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                v-on:click="hero.companion.addAttack()"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row mt-4" v-for="(ataque,index) in hero.companion.attacks">
+                                <div class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header">
+                                            {{ataque.tipo.value}}
+                                            <button type="button" class="float-right btn btn-danger btn-sm"
+                                                v-on:click="hero.companion.dropAttack(index)"><i
+                                                    class="fas fa-trash"></i></button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="form-group col-8">
+                                                    <label for="mlevel">Name:</label>
+                                                    <input class="form-control" v-model="ataque.name"></textarea>
+                                                </div>
+                                                <div class="form-group col-4">
+                                                    <label for="mlevel">CP total:</label>
+                                                    <input class="form-control" readonly
+                                                        :value="ataque.tipo.cp+'/'+ataque.totalCp"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label>Range:</label>
+                                                    <select class="form-control" v-model="ataque.range">
+                                                        <option v-for="alc in ranges" v-bind:value="alc">{{alc}} square
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="mlevel">Target(s): {{ataque.numberTarget}}
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                v-on:click="ataque.changeNumberTarget(-1)"><i
+                                                                    class="fas fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                v-on:click="ataque.changeNumberTarget(1)"><i
+                                                                    class="fas fa-plus"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input class="form-control" v-model="ataque.target">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-9">
+                                                    <label>Beneft:</label>
+                                                    <textarea class="form-control" rows="3"
+                                                        v-model="ataque.benefit.value"></textarea>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label>Beneft CP:
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                v-on:click="ataque.changeBenefitCp(-0.5)"><i
+                                                                    class="fas fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                v-on:click="ataque.changeBenefitCp(0.5)"><i
+                                                                    class="fas fa-plus"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input type="number" readonly class="form-control"
+                                                        v-model="ataque.benefit.cp">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-9">
+                                                    <label>Drawback:</label>
+                                                    <textarea class="form-control" rows="3"
+                                                        v-model="ataque.drawback.value"></textarea>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="txtacp">Drawback CP:
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                v-on:click="ataque.changeDrawbackCp(-0.5)"><i
+                                                                    class="fas fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                v-on:click="ataque.changeDrawbackCp(0.5)"><i
+                                                                    class="fas fa-plus"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input type="number" readonly class="form-control"
+                                                        v-model="ataque.drawback.cp">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Hit:
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                v-on:click="ataque.changeHitCp(-1)"><i
+                                                                    class="fas fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                v-on:click="ataque.changeHitCp(1)"><i
+                                                                    class="fas fa-plus"></i></button>
+                                                        </div> CP: {{ataque.hit.cp}}
+                                                    </label>
+                                                    <input class="form-control" readonly
+                                                        v-model="ataque.hit.value"></textarea>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Miss:
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                v-on:click="ataque.changeMissCp(-0.5)"><i
+                                                                    class="fas fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                v-on:click="ataque.changeMissCp(0.5)"><i
+                                                                    class="fas fa-plus"></i></button>
+                                                        </div> Livre ({{ataque.miss.cp}})
+                                                    </label>
+                                                    <input class="form-control" v-model="ataque.miss.value"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-9">
+                                                    <label>Effect :</label>
+                                                    <textarea class="form-control" rows="3"
+                                                        v-model="ataque.effect.value"></textarea>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label>Effect CP:
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                v-on:click="ataque.changeEffectCp(-0.5)"><i
+                                                                    class="fas fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                v-on:click="ataque.changeEffectCp(0.5)"><i
+                                                                    class="fas fa-plus"></i></button>
+                                                        </div>
+                                                    </label>
+                                                    <input type="number" readonly class="form-control"
+                                                        v-model="ataque.effect.cp">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section about-heading impressaoNao">
+            <div class="container">
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/ataque.jpg" alt="">
+                <div class="about-heading-content">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-10 mx-auto">
+                            <div class="bg-faded rounded p-5">
+                                <h2 class="section-heading mb-4">
+                                    <span class="section-heading-upper">Considerações para criação</span>
+                                    <span class="section-heading-lower">HERÓIS</span>
+                                </h2>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer text-faded text-center py-5 impressaoNao">
+            <div class="container">
+                <p class="m-0 small">Feito na Casa do Goblin 2020</p>
+            </div>
+        </footer>
+
+        <div class="modal" id="ModalLibrary">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tanares Design Library</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" id="librarycontent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="js/hero.js"></script>
+    <script src="js/helper.js"></script>
+
+    <script>
+        var myObject = new Vue({
+            el: '#app',
+            data: {
+                hero: {},
+            },
+            created: function () {
+                this.hero = new Hero();
+                if (sessionStorage.ataques != "null" && sessionStorage.ataques != "undefined") {
+                    this.jsonToObject(sessionStorage.heroi);
+                }
+
+            },
+            mounted: function () {
+                document.addEventListener('focus', this.saveSession, true);
+                loadLibrary('librarycontent');
+            },
+            methods: {
+                saveSession: function () {
+                    sessionStorage.heroi = JSON.stringify(this.hero);
+                },
+                download: function () {
+                    let element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.hero)));
+                    element.setAttribute('download', this.hero.name != "" ? this.hero.name : "heroi");
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                },
+                getFile: function (event) {
+                    let file = event.target.files[0];
+                    let reader = new FileReader();
+                    reader.onload = this.loadatobject;
+                    reader.readAsText(file);
+
+                },
+                loadatobject: function (evt) {
+                    try {
+                        this.jsonToObject(evt.target.result);
+                    } catch (error) {
+                        alert(error);
+                    }
+                },
+                jsonToObject: function (stringJson) {
+                    try {
+                        let loadobj = JSON.parse(stringJson);
+
+                        let heroi = new Hero();
+                        this.hero = loadobj == null ? heroi : heroi.load(loadobj);
+                    } catch (error) {
+                        console.log(error);
+                    }
+
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

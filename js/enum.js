@@ -21,6 +21,7 @@ var monstercolors = [
     { id: 3, cor: 'vermelho', color: 'red', cp: 2 },
 ];
 var alcances = ["1", "2", "8"];
+
 var attacklevels = [
     { id: 1, danoacerto: 14 },
     { id: 1, danoacerto: 14 },
@@ -39,12 +40,20 @@ var skilllevels = [
 
 var ItensMenu=[
     {
+        title:"HEROES",
+        subtitle:"MAKE HISTORY",
+        description:"Contrua herois interessantes e multifacetados, valorizando o trabalho em equipe e aproveitando ao maximo seu papel no combate",
+        image:"img/hero.jpg",
+        url:"heroi.html",
+        isnew:true
+
+    },
+    {
         title:"SKILL TREE",
         subtitle:"CHOSE YOUR PATH",
         description:"Construa as arvores de habiilidades que os herois escolherão, ajude-os a trilhar o melhor caminho.",
         image:"img/skilltree.jpg",
         url:"skilltree.html",
-        isnew:true
     },
     {
         title:"ITEM SET",
